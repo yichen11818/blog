@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yumi&#39;s Blog</title>
+  
+  
+  <link href="http://yumi1.top/atom.xml" rel="self"/>
+  
+  <link href="http://yumi1.top/"/>
+  <updated>2023-08-07T15:50:01.013Z</updated>
+  <id>http://yumi1.top/</id>
+  
+  <author>
+    <name>yichen</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows体验优化小工具(1)</title>
+    <link href="http://yumi1.top/2023/08/07/windows%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96%E5%B0%8F%E5%B7%A5%E5%85%B7-1/"/>
+    <id>http://yumi1.top/2023/08/07/windows%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96%E5%B0%8F%E5%B7%A5%E5%85%B7-1/</id>
+    <published>2023-08-07T13:50:44.000Z</published>
+    <updated>2023-08-07T15:50:01.013Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-windows必装之"><a href="#1-windows必装之" class="headerlink" title="1. windows必装之"></a>1. windows必装之</h2><h3 id="1-1-7zip"><a href="#1-1-7zip" class="headerlink" title="1.1. 7zip"></a>1.1. 7zip</h3><h3 id="1-2-everything"><a href="#1-2-everything" class="headerlink" title="1.2. everything"></a>1.2. everything</h3><h3 id="1-3-notepad"><a href="#1-3-notepad" class="headerlink" title="1.3. notepad++"></a>1.3. notepad++</h3><h3 id="1-4"><a href="#1-4" class="headerlink" title="1.4."></a>1.4.</h3><ol><li>带 <u>下划线</u> 的文本</li><li>带 <emp>着重号</emp> 的文本</li><li>带 <wavy>波浪线</wavy> 的文本</li><li>带 <del>删除线</del> 的文本</li><li>键盘样式的文本 <kbd>command</kbd> + <kbd>D</kbd></li><li>密码样式的文本：<psw>这里没有验证码</psw></li><li>带 <u>下划线</u> 的文本</li><li>带 <emp>着重号</emp> 的文本</li><li>带 <wavy>波浪线</wavy> 的文本</li><li>带 <del>删除线</del> 的文本</li><li>键盘样式的文本 <kbd>command</kbd> + <kbd>D</kbd></li><li>密码样式的文本：<psw>这里没有验证码</psw></li></ol><ul><li>彩色文字<br>在一段话中方便插入各种颜色的标签，包括：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span>、<span class='p cyan'>青色</span>、<span class='p blue'>蓝色</span>、<span class='p gray'>灰色</span>。</li><li>超大号文字<br>文档「开始」页面中的标题部分就是超大号文字。<span class='p center logo large'>Volantis</span><span class='p center small'>A Wonderful Theme for Hexo</span><div class="tip "><p>default</p></div><div class="tip info"><p>info</p></div><div class="tip success"><p>success</p></div><div class="tip error"><p>error</p></div><div class="tip warning"><p>warning</p></div><div class="tip bolt"><p>bolt</p></div><div class="tip ban"><p>ban</p></div><div class="tip home"><p>home</p></div><div class="tip sync"><p>sync</p></div><div class="tip cogs"><p>cogs</p></div><div class="tip key"><p>key</p></div><div class="tip bell"><p>bell</p></div><div class="tip fa-atom"><p>自定义font awesome图标</p></div></li></ul><div class="tip "><p>default</p></div><div class="tip info"><p>info</p></div><div class="tip success"><p>success</p></div><div class="tip error"><p>error</p></div><div class="tip warning"><p>warning</p></div><div class="tip bolt"><p>bolt</p></div><div class="tip ban"><p>ban</p></div><div class="tip home"><p>home</p></div><div class="tip sync"><p>sync</p></div><div class="tip cogs"><p>cogs</p></div><div class="tip key"><p>key</p></div><div class="tip bell"><p>bell</p></div><div class="tip fa-atom"><p>自定义font awesome图标</p></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1-windows必装之&quot;&gt;&lt;a href=&quot;#1-windows必装之&quot; class=&quot;headerlink&quot; title=&quot;1. windows必装之&quot;&gt;&lt;/a&gt;1. windows必装之&lt;/h2&gt;&lt;h3 id=&quot;1-1-7zip&quot;&gt;&lt;a href=&quot;#1-1</summary>
+      
+    
+    
+    
+    
+    <category term="windows优化" scheme="http://yumi1.top/tags/windows%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+</feed>
