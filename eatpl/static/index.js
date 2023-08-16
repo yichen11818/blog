@@ -598,7 +598,6 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
 
     const clickBeforeStyle = $('<style></style>');
     const clickAfterStyle = $('<style></style>');
-    
     clickBeforeStyle.appendTo($(document.head));
     clickAfterStyle.appendTo($(document.head));
 
@@ -637,7 +636,7 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
         saveImage(img, r => {
             clickAfterStyle.html(`
                 .tt1, .tt2, .tt3, .tt4, .tt5 {
-                  background-size: auto 100%;
+                  background-size: auto 90%;
                   background-image: url(${r});
             }`);
         })
