@@ -1,0 +1,4 @@
+总结：
+1.在Powershell 里输入iwr -useb  https://raw.githubusercontent.com/lstprjct/IDM-Activation-Script/main/IAS.ps1 | iex 后回车运行
+2.输入数字1继续运行
+3.弹出 what is the name to be registered? ，输入Internet Download Manager后继续运行，然后注册成功，显示IDM is successfully activated.
