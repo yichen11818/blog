@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-09-11T08:36:56.076Z</updated>
+  <updated>2023-09-11T09:55:51.190Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="https://yumi1.top/windows-optimize-3/"/>
     <id>https://yumi1.top/windows-optimize-3/</id>
     <published>2023-09-11T04:39:41.000Z</published>
-    <updated>2023-09-11T08:36:56.076Z</updated>
+    <updated>2023-09-11T09:55:51.190Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><div class="tip "><p>本贴持续更新,为个人的一些推荐建议,仅供参考</p></div><h2 id="计算机名和用户名-⭐️⭐️⭐️"><a href="#计算机名和用户名-⭐️⭐️⭐️" class="headerlink" title="计算机名和用户名 ⭐️⭐️⭐️ "></a>计算机名和用户名 ⭐️⭐️⭐️ <mark class="hl-label blue">非常重要</mark> </h2><p>win系统是一个多用户系统,每个人都可以使用单独的账号登录win系统。<br>于是，对于不同的人，其使用电脑的数据，就会是不一样的，比如电脑桌面、主题、安装的软件等等。<br>所以，第一次创建用户的时候，当你使用本地账号或微软账号激活windows时,windows会自动将账户名设置为系统文件夹名称,如<code>C:\Users\用户名</code><br><div class="tip bell"><p>系统文件夹名称一旦设置后就极难更改,需要重装系统</p></div><br>如果电脑是通过微软账号激活的,则会自动将用户名设置为微软账号的前五位,如<code>C:\Users\11451</code>,此处无影响.如果电脑是本地激活自己设置账号时含有中文的话<br>一部分对中文兼容不好的软件，在用户目录下写入/读取文件（这部分软件没做中文字符集编码处理），可能会报错。⭐️⭐️⭐️<span class='p red'>请设置本地账号时 用户名设置为英文或者数字</span></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><div class="tip "><p>本贴持续更新,为个人的一些推荐建议,仅供参考</p></div><h2 id="用户名和计算机名"><a href="#用户名和计算机名" class="headerlink" title="用户名和计算机名  "></a>用户名和计算机名  <mark class="hl-label blue">⭐️⭐️⭐️</mark> </h2><ul><li>用户名<br>win系统是一个多用户系统,每个人都可以使用单独的账号登录win系统。<br>于是，对于不同的人，其使用电脑的数据，就会是不一样的，比如电脑桌面、主题、安装的软件等等。<br>所以，第一次创建用户的时候，当你使用本地账号或微软账号激活windows时,windows会自动将账户名设置为系统文件夹名称,如<code>C:\Users\用户名</code><div class="tip bell"><p>系统文件夹名称一旦设置后就极难更改,需要重装系统</p></div><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/yhm (1).png" alt="微软在线激活"/></div><span class="image-caption">微软在线激活</span></div>如果电脑是通过微软账号激活的,则会自动将用户名设置为微软账号的前五位,如<code>C:\Users\11451</code>,此处无影响.如果电脑是本地激活自己设置账号时含有中文的话,一部分对中文兼容不好的软件，在用户目录下写入/读取文件（这部分软件没做中文字符集编码处理），可能会报错。⭐️⭐️⭐️<span class='p red'>请设置本地账号时 用户名设置为英文或者数字</span></li><li>计算机名<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/yhm (2).png"/></div></div>这个主要用于你的电脑与其他设备的互联上，例如ssh,蓝牙设备，投屏设备。这个名字是可以随意更改的，问题不大，但尽量不要是中文，防止<code>□□□</code>乱码。</li></ul>]]></content>
     
     
       
       
     <summary type="html">&lt;h2 id=&quot;写在最前&quot;&gt;&lt;a href=&quot;#写在最前&quot; class=&quot;headerlink&quot; title=&quot;写在最前&quot;&gt;&lt;/a&gt;写在最前&lt;/h2&gt;&lt;div class=&quot;tip &quot;&gt;&lt;p&gt;本贴持续更新,为个人的一些推荐建议,仅供参考&lt;/p&gt;
 &lt;/div&gt;
-&lt;h2 id=&quot;计算</summary>
+&lt;h2 id=&quot;用户</summary>
       
     
     
