@@ -42,7 +42,7 @@
     <link href="https://yumi1.top/linux-proxy/"/>
     <id>https://yumi1.top/linux-proxy/</id>
     <published>2023-09-11T02:00:29.000Z</published>
-    <updated>2023-09-11T04:39:21.373Z</updated>
+    <updated>2023-09-16T16:00:37.216Z</updated>
     
     <content type="html"><![CDATA[<p>这里用unbantu和clash for windows为例</p><h3 id="VMware设置"><a href="#VMware设置" class="headerlink" title="VMware设置"></a>VMware设置</h3><p>打开vmware设置 将虚拟机网络设置为桥接模式<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (2).png"/></div></div></p><h3 id="查看本机ip"><a href="#查看本机ip" class="headerlink" title="查看本机ip"></a>查看本机ip</h3><p>主机cmd输入 <code>ipconfig</code> 找到WLAN适配器的IPv4地址 并复制<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (3).png"/></div></div></p><h3 id="clash-for-windows设置"><a href="#clash-for-windows设置" class="headerlink" title="clash for windows设置"></a>clash for windows设置</h3><p>打开 allow-lan 允许局域网<br>clash配置用tun模式和系统代理都可以<br>同时记住端口号,我这里是7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm.png"/></div></div></p><div class="tip bell"><p>注意,请保持随机混合端口为关闭状态</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm2.png"/></div></div></div><h3 id="虚拟机设置"><a href="#虚拟机设置" class="headerlink" title="虚拟机设置"></a>虚拟机设置</h3><p>打开系统设置 找到网络-&gt;proxy-&gt;manual<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (1).png"/></div></div><br>将ip设置为之前获取的本机ip 端口号设置为clash里写的7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm3.png"/></div></div></p><h2 id="可以访问外网了"><a href="#可以访问外网了" class="headerlink" title="可以访问外网了"></a>可以访问外网了</h2><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm1.png"/></div></div>]]></content>
     
@@ -54,7 +54,7 @@
     <category term="技术学习" scheme="https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="vpn" scheme="https://yumi1.top/tags/vpn/"/>
+    <category term="vpn linux" scheme="https://yumi1.top/tags/vpn-linux/"/>
     
   </entry>
   
