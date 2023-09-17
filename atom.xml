@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-09-17T06:27:03.485Z</updated>
+  <updated>2023-09-17T16:49:48.963Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ubuntu 20.04 安装或者更新时出现 waiting for unattended-upgr to exit 解决办法</title>
+    <link href="https://yumi1.top/linux-proxy-1/"/>
+    <id>https://yumi1.top/linux-proxy-1/</id>
+    <published>2023-09-17T16:44:17.000Z</published>
+    <updated>2023-09-17T16:49:48.963Z</updated>
+    
+    <content type="html"><![CDATA[<p>暂停更新或安装后运行以下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock </span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock-frontend </span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;暂停更新或安装后运行以下&lt;br&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>(保姆教程)从零使用windows - 4. 键盘及快捷键</title>
@@ -122,11 +144,11 @@
   </entry>
   
   <entry>
-    <title>如何使用vpn翻墙</title>
+    <title>如何使用vpn翻墙(待更新)</title>
     <link href="https://yumi1.top/vpn/"/>
     <id>https://yumi1.top/vpn/</id>
     <published>2023-08-15T15:26:06.000Z</published>
-    <updated>2023-08-16T15:59:40.431Z</updated>
+    <updated>2023-09-17T16:47:20.995Z</updated>
     
     
     
