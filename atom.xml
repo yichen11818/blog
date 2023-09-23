@@ -42,7 +42,7 @@
     <link href="https://yumi1.top/linux-optimize-1/"/>
     <id>https://yumi1.top/linux-optimize-1/</id>
     <published>2023-09-17T16:57:32.000Z</published>
-    <updated>2023-09-23T20:39:24.350Z</updated>
+    <updated>2023-09-23T20:41:10.976Z</updated>
     
     <content type="html"><![CDATA[<kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>T</kbd>打开终端<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure><div class="note bell no-icon flat"><p>小插曲 没安装apt<br>显示无法识别指令 运行<code>sudo apt-get install apt</code></p></div><p>安装完成后输入docker -v,查看版本号</p>]]></content>
     
@@ -199,7 +199,7 @@
     <link href="https://yumi1.top/vpn/"/>
     <id>https://yumi1.top/vpn/</id>
     <published>2023-08-15T15:26:06.000Z</published>
-    <updated>2023-09-23T20:39:21.348Z</updated>
+    <updated>2023-09-23T20:41:14.228Z</updated>
     
     
     
