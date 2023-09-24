@@ -20,15 +20,6 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/windows-poser-2/</loc>
-    
-    <lastmod>2023-09-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yumi1.top/windows-poser-1/</loc>
     
     <lastmod>2023-09-23</lastmod>
@@ -130,7 +121,7 @@
 
   <url>
     <loc>https://yumi1.top/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -138,35 +129,35 @@
   
   <url>
     <loc>https://yumi1.top/tags/vpn/</loc>
-    <lastmod>2023-09-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yumi1.top/tags/steam/</loc>
-    <lastmod>2023-09-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yumi1.top/tags/windows/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yumi1.top/tags/linux/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yumi1.top/tags/docker/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/tags/windows/</loc>
+    <lastmod>2023-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/tags/steam/</loc>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -175,21 +166,21 @@
   
   <url>
     <loc>https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yumi1.top/categories/%E4%BB%8E%E9%9B%B6%E4%BD%BF%E7%94%A8windows/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
-    <lastmod>2023-09-23</lastmod>
+    <lastmod>2023-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

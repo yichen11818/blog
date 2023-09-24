@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-09-23T20:26:25.621Z</updated>
+  <updated>2023-09-23T20:41:10.976Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>windows开始菜单与搜索栏同时打开</title>
-    <link href="https://yumi1.top/windows-poser-2/"/>
-    <id>https://yumi1.top/windows-poser-2/</id>
-    <published>2023-09-23T20:02:57.000Z</published>
-    <updated>2023-09-23T20:26:25.621Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="电脑信息"><a href="#电脑信息" class="headerlink" title="电脑信息"></a>电脑信息</h2><ul><li>型号    惠普 Victus by HP Laptop 16-d1XXX</li><li>系统     Windows 10 专业版 19045.3448</li></ul><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>win10使用ExplorerPatcher修改开始菜单与搜索栏后<br>发现打开开始菜单时,搜索栏总是会同时打开<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/start.png"/></div></div><br>猜测是搜索栏注册表被修改错了</p><p>新建文本文档,复制以下代码,保存为.reg文件,双击导入注册表<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]</span><br><span class="line">&quot;ImmersiveSearch&quot;=-</span><br><span class="line"></span><br><span class="line">[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search\Flighting\Override]</span><br><span class="line">&quot;ImmersiveSearchFull&quot;=dword:00000001</span><br><span class="line">&quot;CenterScreenRoundedCornerRadius&quot;=dword:00000009</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    
-    <summary type="html">打开开始菜单时,搜索栏总是会同时打开</summary>
-    
-    
-    
-    <category term="问题解决" scheme="https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
-    
-    
-    <category term="windows" scheme="https://yumi1.top/tags/windows/"/>
-    
-  </entry>
   
   <entry>
     <title>linux的docker安装(未更新)</title>
