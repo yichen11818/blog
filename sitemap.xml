@@ -128,13 +128,6 @@
 
   
   <url>
-    <loc>https://yumi1.top/tags/vpn/</loc>
-    <lastmod>2023-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yumi1.top/tags/linux/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -142,7 +135,7 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/windows/</loc>
+    <loc>https://yumi1.top/tags/docker/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -156,7 +149,14 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/docker/</loc>
+    <loc>https://yumi1.top/tags/vpn/</loc>
+    <lastmod>2023-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/tags/windows/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -165,14 +165,14 @@
 
   
   <url>
-    <loc>https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
+    <loc>https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
