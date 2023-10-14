@@ -165,27 +165,20 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/school/</loc>
-    <lastmod>2023-10-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yumi1.top/tags/windows/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://yumi1.top/tags/school/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+
   
   <url>
     <loc>https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
@@ -195,7 +188,7 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -203,6 +196,13 @@
   
   <url>
     <loc>https://yumi1.top/categories/%E4%BB%8E%E9%9B%B6%E4%BD%BF%E7%94%A8windows/</loc>
+    <lastmod>2023-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2023-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
