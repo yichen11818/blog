@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-10-16T02:55:10.459Z</updated>
+  <updated>2023-10-16T02:57:35.202Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -21,12 +21,16 @@
     <link href="https://yumi1.top/School-chaoxing-class/"/>
     <id>https://yumi1.top/School-chaoxing-class/</id>
     <published>2023-10-16T02:35:18.000Z</published>
-    <updated>2023-10-16T02:55:10.459Z</updated>
+    <updated>2023-10-16T02:57:35.202Z</updated>
     
     <content type="html"><![CDATA[<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><div class="tip "><p>此贴仅为技术研究分析,请勿将此教程用于贩卖,使用程序造成的后果自行承担</p></div><div class="note success modern"><p>摆脱学校布置的无用网课 释放垃圾时间(<a href="https://www.bilibili.com/">bilibili</a>,<a href="https://www.icourse163.org/">MOOC</a>,<a href="https://www.youtube.com/">YouTube</a>上有优质课程资源)</p></div><h2 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h2><p>打开Edge浏览器<img no-lazy class="inline" src="/image/edge.png" style="height:100px;"/></p><h2 id="安装篡改猴-油猴"><a href="#安装篡改猴-油猴" class="headerlink" title="安装篡改猴 (油猴)       "></a>安装<a href="https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/iikmkjmpaadaobahmlepeloendndfphd">篡改猴</a> (油猴)       <img no-lazy class="inline" src="/image/4.png" style="height:40px;"/></h2><p>(又名Tampermonkey/油猴) 以下称油猴</p><a class="btn-beautify outline blue larger" href="https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/iikmkjmpaadaobahmlepeloendndfphd"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a><h2 id="安装OCS-网课助手"><a href="#安装OCS-网课助手" class="headerlink" title="安装OCS 网课助手"></a>安装<a href="https://greasyfork.org/zh-CN/scripts/457151-ocs-%E7%BD%91%E8%AF%BE%E5%8A%A9%E6%89%8B">OCS 网课助手</a></h2><a class="btn-beautify outline blue larger" href="https://greasyfork.org/zh-CN/scripts/457151-ocs-%E7%BD%91%E8%AF%BE%E5%8A%A9%E6%89%8B"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a><div class="tag link"><a class="link-card" title="OCS官网链接" href="https://docs.ocsjs.com/"><div class="left"><img src="https://cdn.ocsjs.com/logo.png"/></div><div class="right"><p class="text">OCS官网链接</p><p class="url">https://docs.ocsjs.com/</p></div></a></div><ol><li>安装完OCS</li><li>打开超星，智慧树，等网课平台，等待页面上出现提示面板(一个白色的小框框，一般在屏幕正中间)</li><li><p>点开进行自动播放的相关设置</p><div class="tip warning faa-horizontal animated"><p>部分平台检测倍速十分严格,请谨慎开启</p></div><img no-lazy class="inline" src="/image/wk.png" style="height:350px;"/><img no-lazy class="inline" src="/image/wk1.png" style="height:450px;"/></li></ol><p>到此自动刷课就设置完了,接下来是自动答题</p><ol><li>自动答题</li></ol><ul><li>前往 <a href="https://tk.enncy.cn/user/dashboard">言溪题库</a> 注册账号,并复制题库配置<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/dt3.png" style="height:500px;"/></div></div><center>复制题库配置</center><br><img src="/image/dt1.png" alt="" title="点击配置按钮"><img src="/image/dt2.png" alt="" title="粘贴题库配置,保存"><br>即可自动答题啦!!</li></ul><h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><div class="reference-source"><span class="hidden-anchor" id="referfrom_[1]"></span><a class="reference-anchor" href="#referto_[1]">[1]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" href="https://www.yumi1.top/windows-optimize-1/">(保姆教程) 从零使用 windows - 1. 浏览器及其插件</a></div>]]></content>
     
     
-    <summary type="html">使用油猴搭配脚本自动完成网课</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在最前&quot;&gt;&lt;a href=&quot;#写在最前&quot; class=&quot;headerlink&quot; title=&quot;写在最前&quot;&gt;&lt;/a&gt;写在最前&lt;/h2&gt;&lt;div class=&quot;tip &quot;&gt;&lt;p&gt;此贴仅为技术研究分析,请勿将此教程用于贩卖,使用程序造成的后果自行承担&lt;/p&gt;
+&lt;/di</summary>
+      
     
     
     
