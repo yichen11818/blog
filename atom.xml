@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-10-25T11:19:20.651Z</updated>
+  <updated>2023-10-25T11:48:10.837Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -21,16 +21,15 @@
     <link href="https://yumi1.top/linux-mysql/"/>
     <id>https://yumi1.top/linux-mysql/</id>
     <published>2023-10-25T06:58:17.000Z</published>
-    <updated>2023-10-25T11:19:20.651Z</updated>
+    <updated>2023-10-25T11:48:10.837Z</updated>
     
-    <content type="html"><![CDATA[<p>以ubuntu为例<br><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> 打开终端</p><p>sudo apt install mysql-server</p><p>sudo /etc/init.d/mysql start</p><p>mysql —version</p><p>sudo mysql_secure_installation</p><p>yyyyyyyyyy</p><p>sudo mysql</p><p>ALTER USER ‘root’@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘你的密码’;<br>FLUSH PRIVILEGES;</p><p>mysql -u root -p</p>]]></content>
+    <content type="html"><![CDATA[<p>以ubuntu为例<br><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> 打开终端</p><h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure><h2 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/mysql start</span><br></pre></td></tr></table></figure><h2 id="查看mysql版本检测是否安装成功"><a href="#查看mysql版本检测是否安装成功" class="headerlink" title="查看mysql版本检测是否安装成功"></a>查看mysql版本检测是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure><h2 id="安全设置"><a href="#安全设置" class="headerlink" title="安全设置"></a>安全设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/311a932df4b4b07d209bd5a0655ffd46.png"/></div></div><p>密码安全性 这里我输零<br>接下来<br>yyyyyyyyyy一顿确认即可</p><h2 id="进入mysql修改密码"><a href="#进入mysql修改密码" class="headerlink" title="进入mysql修改密码"></a>进入mysql修改密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql</span><br></pre></td></tr></table></figure><p>在mysql下修改密码<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;你的密码&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure></p><h2 id="登录mysql"><a href="#登录mysql" class="headerlink" title="登录mysql"></a>登录mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure><p>输入刚刚设置的密码即可</p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;以ubuntu为例&lt;br&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;Alt&lt;/kbd&gt; + &lt;kbd&gt;T&lt;/kbd&gt; 打开终端&lt;/p&gt;
-&lt;p&gt;sudo apt install mysql-server&lt;/p&gt;
-&lt;p&gt;sudo /etc/init.d/mysql star</summary>
+&lt;h2 id=&quot;安装mysql&quot;&gt;&lt;a href=&quot;#安装mysql&quot; class=&quot;headerlink&quot; title=&quot;安装mys</summary>
       
     
     
