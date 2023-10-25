@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2023-10-19T07:17:51.643Z</updated>
+  <updated>2023-10-25T08:07:36.602Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux的mysql安装方法</title>
+    <link href="https://yumi1.top/linux-mysql/"/>
+    <id>https://yumi1.top/linux-mysql/</id>
+    <published>2023-10-25T06:58:17.000Z</published>
+    <updated>2023-10-25T08:07:36.602Z</updated>
+    
+    <content type="html"><![CDATA[<p>以ubuntu为例</p><h2 id="下载mysql包"><a href="#下载mysql包" class="headerlink" title="下载mysql包"></a>下载mysql包</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz</span><br></pre></td></tr></table></figure><h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf mysql-8.0.26-linux-glibc2.12-x86_64.tar.xz </span><br></pre></td></tr></table></figure><h2 id="移动到-usr-local并改名"><a href="#移动到-usr-local并改名" class="headerlink" title="移动到/usr/local并改名"></a>移动到/usr/local并改名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /home/mysql-8.0.26-linux-glibc2.12-x86_64  /usr/local/mysql</span><br></pre></td></tr></table></figure><h2 id="新建用户组及用户"><a href="#新建用户组及用户" class="headerlink" title="新建用户组及用户"></a>新建用户组及用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd mysql</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -r -g mysql mysql</span><br></pre></td></tr></table></figure><h2 id="创建数据目录并赋予权限"><a href="#创建数据目录并赋予权限" class="headerlink" title="创建数据目录并赋予权限"></a>创建数据目录并赋予权限</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/mysql</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql -R /data/mysql</span><br></pre></td></tr></table></figure><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure><kbd>INS</kbd><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line">port=3306</span><br><span class="line">user=mysql</span><br><span class="line">basedir=/usr/local/mysql</span><br><span class="line">datadir=/data/mysql</span><br><span class="line">socket=/tmp/mysql.sock</span><br><span class="line">log-error=/data/mysql/mysql.err</span><br><span class="line">pid-file=/data/mysql/mysql.pid</span><br><span class="line">#character config</span><br><span class="line">character_set_server=utf8mb4</span><br><span class="line">symbolic-links=0</span><br><span class="line">explicit_defaults_for_timestamp=true</span><br></pre></td></tr></table></figure><kbd>ESC</kbd><p>输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure></p><kbd>Enter</kbd><h2 id="初始化mysql"><a href="#初始化mysql" class="headerlink" title="初始化mysql"></a>初始化mysql</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/mysql/bin/</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqld --defaults-file=/etc/my.cnf --basedir=/usr/local/mysql/ --datadir=/data/mysql/</span><br></pre></td></tr></table></figure><h2 id="查看初始密码"><a href="#查看初始密码" class="headerlink" title="查看初始密码"></a>查看初始密码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /data/mysql/mysql.err</span><br></pre></td></tr></table></figure><h2 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/my.cnf </span><br></pre></td></tr></table></figure><kbd>INS</kbd><p>添加<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure></p><kbd>ESC</kbd><p>输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure></p><kbd>Enter</kbd><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure><h2 id="进入"><a href="#进入" class="headerlink" title="进入"></a>进入</h2><figure class="highlight plaintext"><figcaption><span>-u root -p</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">直接回车</span><br></pre></td></tr></table></figure><p>use mysql 　　　　 #选择访问mysql库<br>update user set host = ‘%’ where user = ‘root’; 　　　　 #使root能再任何host访问<br>FLUSH PRIVILEGES; 　　 　　 #刷新<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 修改密码</span><br></pre></td></tr></table></figure><br>LTER USER “root”@”%” IDENTIFIED  BY “1234”;<br>FLUSH PRIVILEGES;<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">quit </span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/my.cnf </span><br></pre></td></tr></table></figure></p><kbd>INS</kbd><p>删除<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure></p><kbd>ESC</kbd><p>输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure></p><kbd>Enter</kbd><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure><h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql/bin/mysql -u root -p</span><br></pre></td></tr></table></figure><p>输入1234 回车</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;以ubuntu为例&lt;/p&gt;
+&lt;h2 id=&quot;下载mysql包&quot;&gt;&lt;a href=&quot;#下载mysql包&quot; class=&quot;headerlink&quot; title=&quot;下载mysql包&quot;&gt;&lt;/a&gt;下载mysql包&lt;/h2&gt;&lt;figure class=&quot;highlight plainte</summary>
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
+    
+    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>大学的一些繁琐事解决小技巧--校园网开机自动拨号+断线重连</title>
@@ -110,30 +135,6 @@
   </entry>
   
   <entry>
-    <title>ubuntu 20.04 安装或者更新时出现 waiting for unattended-upgr to exit 解决办法</title>
-    <link href="https://yumi1.top/linux-poser-1/"/>
-    <id>https://yumi1.top/linux-poser-1/</id>
-    <published>2023-09-17T16:44:17.000Z</published>
-    <updated>2023-09-17T16:57:08.134Z</updated>
-    
-    <content type="html"><![CDATA[<p>暂停更新或安装后运行以下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock </span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock-frontend </span><br></pre></td></tr></table></figure><br>哦豁,又水一篇</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;暂停更新或安装后运行以下&lt;br&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="问题解决" scheme="https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
-    
-    
-    <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>(保姆教程)从零使用windows - 4. 键盘及快捷键</title>
     <link href="https://yumi1.top/windows-optimize-4/"/>
     <id>https://yumi1.top/windows-optimize-4/</id>
@@ -176,13 +177,13 @@
   </entry>
   
   <entry>
-    <title>VMware unbantu走本机代理</title>
+    <title>VMware ubuntu走本机代理</title>
     <link href="https://yumi1.top/linux-proxy/"/>
     <id>https://yumi1.top/linux-proxy/</id>
     <published>2023-09-11T02:00:29.000Z</published>
-    <updated>2023-09-18T07:06:31.538Z</updated>
+    <updated>2023-10-25T07:03:44.948Z</updated>
     
-    <content type="html"><![CDATA[<p>这里用unbantu和clash for windows为例</p><h3 id="VMware设置"><a href="#VMware设置" class="headerlink" title="VMware设置"></a>VMware设置</h3><p>打开vmware设置 将虚拟机网络设置为桥接模式<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (2).png"/></div></div></p><h3 id="查看本机ip"><a href="#查看本机ip" class="headerlink" title="查看本机ip"></a>查看本机ip</h3><p>主机cmd输入 <code>ipconfig</code> 找到WLAN适配器的IPv4地址 并复制<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (3).png"/></div></div></p><h3 id="clash-for-windows设置"><a href="#clash-for-windows设置" class="headerlink" title="clash for windows设置"></a>clash for windows设置</h3><p>打开 allow-lan 允许局域网<br>clash配置用tun模式和系统代理都可以<br>同时记住端口号,我这里是7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm.png"/></div></div></p><div class="tip bell"><p>注意,请保持随机混合端口为关闭状态</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm2.png"/></div></div></div><h3 id="虚拟机设置"><a href="#虚拟机设置" class="headerlink" title="虚拟机设置"></a>虚拟机设置</h3><p>打开系统设置 找到网络-&gt;proxy-&gt;manual<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (1).png"/></div></div><br>将ip设置为之前获取的本机ip 端口号设置为clash里写的7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm3.png"/></div></div></p><h2 id="可以访问外网了"><a href="#可以访问外网了" class="headerlink" title="可以访问外网了"></a>可以访问外网了</h2><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm1.png"/></div></div>]]></content>
+    <content type="html"><![CDATA[<p>这里用ubuntu和clash for windows为例</p><h3 id="VMware设置"><a href="#VMware设置" class="headerlink" title="VMware设置"></a>VMware设置</h3><p>打开vmware设置 将虚拟机网络设置为桥接模式<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (2).png"/></div></div></p><h3 id="查看本机ip"><a href="#查看本机ip" class="headerlink" title="查看本机ip"></a>查看本机ip</h3><p>主机cmd输入 <code>ipconfig</code> 找到WLAN适配器的IPv4地址 并复制<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (3).png"/></div></div></p><h3 id="clash-for-windows设置"><a href="#clash-for-windows设置" class="headerlink" title="clash for windows设置"></a>clash for windows设置</h3><p>打开 allow-lan 允许局域网<br>clash配置用tun模式和系统代理都可以<br>同时记住端口号,我这里是7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm.png"/></div></div></p><div class="tip bell"><p>注意,请保持随机混合端口为关闭状态</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm2.png"/></div></div></div><h3 id="虚拟机设置"><a href="#虚拟机设置" class="headerlink" title="虚拟机设置"></a>虚拟机设置</h3><p>打开系统设置 找到网络-&gt;proxy-&gt;manual<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (1).png"/></div></div><br>将ip设置为之前获取的本机ip 端口号设置为clash里写的7890<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm3.png"/></div></div></p><h2 id="可以访问外网了"><a href="#可以访问外网了" class="headerlink" title="可以访问外网了"></a>可以访问外网了</h2><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm1.png"/></div></div>]]></content>
     
     
     <summary type="html">VMware虚拟机如何通过clash for windows走主机代理</summary>
