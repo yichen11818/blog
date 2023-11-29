@@ -144,9 +144,9 @@
     
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
     
-    <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
-    
     <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
+    
+    <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
@@ -255,9 +255,9 @@
     
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
     
-    <category term="docker" scheme="https://yumi1.top/tags/docker/"/>
-    
     <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
+    
+    <category term="docker" scheme="https://yumi1.top/tags/docker/"/>
     
   </entry>
   
