@@ -189,27 +189,6 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/%E6%A0%A1%E5%9B%AD%E8%B7%91/</loc>
-    <lastmod>2023-12-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yumi1.top/tags/fake-location/</loc>
-    <lastmod>2023-12-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yumi1.top/tags/root/</loc>
-    <lastmod>2023-12-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yumi1.top/tags/%E6%B2%B9%E7%8C%B4/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -273,7 +252,28 @@
   </url>
   
   <url>
+    <loc>https://yumi1.top/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/</loc>
+    <lastmod>2023-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/tags/vpn/</loc>
+    <lastmod>2023-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://yumi1.top/tags/linux/</loc>
+    <lastmod>2023-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yumi1.top/tags/vmware/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -294,28 +294,28 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/</loc>
+    <loc>https://yumi1.top/tags/docker/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/vpn/</loc>
+    <loc>https://yumi1.top/tags/%E6%A0%A1%E5%9B%AD%E8%B7%91/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/vmware/</loc>
+    <loc>https://yumi1.top/tags/fake-location/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/steam/</loc>
+    <loc>https://yumi1.top/tags/root/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -329,7 +329,7 @@
   </url>
   
   <url>
-    <loc>https://yumi1.top/tags/docker/</loc>
+    <loc>https://yumi1.top/tags/steam/</loc>
     <lastmod>2023-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
