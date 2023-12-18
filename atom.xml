@@ -144,9 +144,9 @@
     
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
     
-    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
-    
     <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
+    
+    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
     
   </entry>
   
@@ -155,9 +155,9 @@
     <link href="https://yumi1.top/School-net/"/>
     <id>https://yumi1.top/School-net/</id>
     <published>2023-10-19T05:31:58.000Z</published>
-    <updated>2023-11-27T17:49:21.032Z</updated>
+    <updated>2023-12-18T14:53:26.347Z</updated>
     
-    <content type="html"><![CDATA[<p>校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</p><h2 id="校园网分析"><a href="#校园网分析" class="headerlink" title="校园网分析"></a>校园网分析</h2><p>我校使用的Drcom(p版)拨号客户端,无网页认证,抓包及查看系统日志可见此软件即为ppoe拨号软件,宽带账号及密码可在网络设置中查看<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/net.webp"/></div></div></p><h2 id="拨号"><a href="#拨号" class="headerlink" title="拨号"></a>拨号</h2><p>打开<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code><br><code>设置新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh1.webp"/></div></div><br><code>连接到internet</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (5).webp"/></div></div><br><code>设置新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (4).webp"/></div></div><br><code>创建新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (3).webp"/></div></div><br><code>宽带</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (1).webp"/></div></div><br>如果是联通则用户名为<code>学号@unicom</code>,密码为<code>身份证后六位</code><br>移动用户名为<code>学号@cmcc</code>,密码为<code>身份证后六位</code><br>电信用户名为<code>学号@telecom</code>,密码为<code>身份证后六位</code><br>如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018xxxxxx@unicom</span><br></pre></td></tr></table></figure><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (2).webp"/></div></div><br>注意, 链接名称为 <code>net</code><br>然后点击链接即可</p><p>下载以下脚本,并解压到任意位置<br><a class="btn-beautify outline" href="https://yumi1.lanzouw.com/iwiza1c75pgh"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a></p><p>右键<code>拨号.bat</code>-&gt;<code>编辑</code>将内容修改为自己的<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh4.webp"/></div></div><br>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code><br>如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@rasdial net 2018xxxxxx@unicom 123456</span><br></pre></td></tr></table></figure><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh3.webp"/></div></div></p><p>修改完后双击<code>拨号.bat</code>即可进行联网  秒连校园网成功 可将这个.bat文件丢到桌面 双击就可实现拨号<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh2.webp"/></div></div></p><h2 id="断线自动重连-开机自动拨号"><a href="#断线自动重连-开机自动拨号" class="headerlink" title="断线自动重连 开机自动拨号"></a>断线自动重连 开机自动拨号</h2><p>使用<code>任务管理计划</code>实现断网自动重连</p><p><i class="fa-brands fa-windows"></i> + <kbd>R</kbd>输入<code>taskschd.msc</code>回车</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{B8588708-6437-4716-A455-2A1CB512A5D4}.webp"/></div></div><p>导入任务<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{0A2C842D-B3AF-4672-A6A6-826624A8FBCE}.webp"/></div></div><br>导入之前下载的压缩包里的<code>自动联网.xml</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{95341A0A-DA19-481a-9867-229210548D44}.webp"/></div></div><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{3857AF9D-E744-4e5b-A5DA-85DA1DCA8E04}.webp"/></div></div><br>修改为自己的<br>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{7ABA55D8-FCEA-498c-90DB-6003116CC9E1}.webp"/></div></div><br>确定即可</p><p>断线就会自动重连了</p><h2 id="善后"><a href="#善后" class="headerlink" title="善后"></a>善后</h2><ul><li>删除掉学校的客户端 </li><li>删除<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code>界面中名为Dr.com的拨号链接<br>重启电脑 自动拨号成功即可</li></ul>]]></content>
+    <content type="html"><![CDATA[<p><font size=6 color=red>本方案可代替校园网拨号软件,实现开机自动拨号,断线秒连</font><br>校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</p><h2 id="校园网分析"><a href="#校园网分析" class="headerlink" title="校园网分析"></a>校园网分析</h2><p>我校使用的Drcom(p版)拨号客户端,无网页认证,抓包及查看系统日志可见此软件即为ppoe拨号软件,宽带账号及密码可在网络设置中查看<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/net.webp"/></div></div></p><h2 id="拨号"><a href="#拨号" class="headerlink" title="拨号"></a>拨号</h2><p>打开<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code><br><code>设置新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh1.webp"/></div></div><br><code>连接到internet</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (5).webp"/></div></div><br><code>设置新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (4).webp"/></div></div><br><code>创建新连接</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (3).webp"/></div></div><br><code>宽带</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (1).webp"/></div></div><br>如果是联通则用户名为<code>学号@unicom</code>,密码为<code>身份证后六位</code><br>移动用户名为<code>学号@cmcc</code>,密码为<code>身份证后六位</code><br>电信用户名为<code>学号@telecom</code>,密码为<code>身份证后六位</code><br>如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018xxxxxx@unicom</span><br></pre></td></tr></table></figure><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (2).webp"/></div></div><br>注意, 链接名称为 <code>net</code><br>然后点击链接即可</p><p>下载以下脚本,并解压到任意位置<br><a class="btn-beautify outline" href="https://yumi1.lanzouw.com/iwiza1c75pgh"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a></p><p>右键<code>拨号.bat</code>-&gt;<code>编辑</code>将内容修改为自己的<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh4.webp"/></div></div><br>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code><br>如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@rasdial net 2018xxxxxx@unicom 123456</span><br></pre></td></tr></table></figure><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh3.webp"/></div></div></p><p>修改完后双击<code>拨号.bat</code>即可进行联网  秒连校园网成功 可将这个.bat文件丢到桌面 双击就可实现拨号<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh2.webp"/></div></div></p><h2 id="断线自动重连-开机自动拨号"><a href="#断线自动重连-开机自动拨号" class="headerlink" title="断线自动重连 开机自动拨号"></a>断线自动重连 开机自动拨号</h2><p>使用<code>任务管理计划</code>实现断网自动重连</p><p><i class="fa-brands fa-windows"></i> + <kbd>R</kbd>输入<code>taskschd.msc</code>回车</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{B8588708-6437-4716-A455-2A1CB512A5D4}.webp"/></div></div><p>导入任务<br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{0A2C842D-B3AF-4672-A6A6-826624A8FBCE}.webp"/></div></div><br>导入之前下载的压缩包里的<code>自动联网.xml</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{95341A0A-DA19-481a-9867-229210548D44}.webp"/></div></div><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{3857AF9D-E744-4e5b-A5DA-85DA1DCA8E04}.webp"/></div></div><br>修改为自己的<br>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code><br><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{7ABA55D8-FCEA-498c-90DB-6003116CC9E1}.webp"/></div></div><br>确定即可</p><p>断线就会自动重连了</p><h2 id="善后"><a href="#善后" class="headerlink" title="善后"></a>善后</h2><ul><li>删除掉学校的客户端 </li><li>删除<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code>界面中名为Dr.com的拨号链接<br>重启电脑 自动拨号成功即可</li></ul>]]></content>
     
     
     <summary type="html">使用任务计划程序进行自动拨号+断线重连</summary>
@@ -255,9 +255,9 @@
     
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
     
-    <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
-    
     <category term="docker" scheme="https://yumi1.top/tags/docker/"/>
+    
+    <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
@@ -322,9 +322,9 @@
     <category term="技术学习" scheme="https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="vpn" scheme="https://yumi1.top/tags/vpn/"/>
-    
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
+    
+    <category term="vpn" scheme="https://yumi1.top/tags/vpn/"/>
     
     <category term="vmware" scheme="https://yumi1.top/tags/vmware/"/>
     
