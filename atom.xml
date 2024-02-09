@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2024-02-09T18:35:46.490Z</updated>
+  <updated>2023-11-29T17:15:41.470Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>gooseduck</title>
-    <link href="https://yumi1.top/goosegooseduck/"/>
-    <id>https://yumi1.top/goosegooseduck/</id>
-    <published>2024-02-09T18:26:51.000Z</published>
-    <updated>2024-02-09T18:35:46.490Z</updated>
-    
-    <content type="html"><![CDATA[<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe src="/image/desk.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"> </iframe></div>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;div style=&quot;position: relative; width: 100%; height: 0; padding-bottom: 75%;&quot;&gt;&lt;iframe src=&quot;/image/desk.mp4&quot; scrolling=&quot;no&quot; border=&quot;0&quot; 
-frame</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>百度网盘破限速实现70MB/s下载速度</title>
