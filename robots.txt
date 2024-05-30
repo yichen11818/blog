@@ -1,0 +1,6 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://yumi1.top/sitemap.xml
+Sitemap: https://yumi1.top/baidusitemap.xml
