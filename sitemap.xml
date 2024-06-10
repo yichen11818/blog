@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yumi1.top/school-video/</loc>
+    
+    <lastmod>2024-06-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yumi1.top/exercise-solving-diary-2/</loc>
     
     <lastmod>2024-06-09</lastmod>
@@ -86,15 +95,6 @@
     <loc>https://yumi1.top/vpn/</loc>
     
     <lastmod>2024-05-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yumi1.top/school-video/</loc>
-    
-    <lastmod>2024-05-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
