@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询余丁凯成分</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        #background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* 确保视频覆盖背景 */
+            display: none; /* 初始隐藏 */
+        }
+        #myButton {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #008cba;
+            color: white;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        #myImage {
+            display: none;
+            width: 300px;
+            height: 300px;
+            transition: opacity 2s;
+            position: absolute;
+            animation: rotate 5s linear infinite, jump 1s ease-in-out infinite;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<video id="background-video" loop>
+    <source src="1.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+
+<button id="myButton" onclick="showImage()">查询余丁凯成分</button>
+<img id="myImage" src="1.png" alt="Rotating Image">
+
+<script>
+    function showImage() {
+        const image = document.getElementById('myImage');
+        const video = document.getElementById('background-video');
+        image.style.display = 'block';
+        image.style.opacity = 1;
+        video.style.display = 'block'; // 显示视频
+        video.play();
+        video.muted = false;
+    }
+</script>
+
+</body>
+</html>

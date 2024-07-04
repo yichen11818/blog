@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2024-06-14T21:17:37.546Z</updated>
+  <updated>2024-06-27T18:48:07.321Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yumi1.top/openwrt/"/>
     <id>https://yumi1.top/openwrt/</id>
     <published>2024-06-14T20:34:09.000Z</published>
-    <updated>2024-06-14T21:17:37.546Z</updated>
+    <updated>2024-06-27T18:48:07.321Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题描述">问题描述</h2><pre><code>使用openwrt固件下设备访问`vercel.com`时出现`ERR_NAME_NOT_RESOLVED`错误,其他网站正常访问</code></pre><p>尝试如下指令刷新dns,但是无效</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /release</span><br><span class="line">ipconfig /renew</span><br><span class="line">ipconfig /flushdns</span><br><span class="line">net stop dnscache</span><br><span class="line">net start dnscache</span><br></pre></td></tr></table></figure><h2 id="问题解决">问题解决</h2><ol><li><i class="fa-brands fa-windows"></i> + <kbd>R</kbd>输入 <code>cmd</code> 打开命令行窗口,输入如下命令</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup vercel.com </span><br></pre></td></tr></table></figure><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/openwrt/2024-06-15-04-49-57.png"/></div></div><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup vercel.com 8.8.8.8</span><br></pre></td></tr></table></figure><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/openwrt/2024-06-15-05-09-44.png"/></div></div><p>解析到路由器53端口,路由器通过重定向客户端DNS到dnsmasq,再通过dnsmasq解析域名</p><ol start="2"><li>此时浏览器打开路由器后台<br>进入终端</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping vercel.com</span><br></pre></td></tr></table></figure><p>出现<code>ping: bad address 'vercel.com'</code>说明路由器无法解析<code>vercel.com</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/openwrt/2024-06-15-04-57-21.png"/></div></div><p>(图中ping通了,他当时没ping通)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceroute vercel.com</span><br></pre></td></tr></table></figure><p>出现<code>traceroute: bad address 'vercel.com'</code>说明路由器无法解析<code>vercel.com</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup vercel.com</span><br></pre></td></tr></table></figure><pre><code>Server:127.0.0.1Address:127.0.0.1#53Name:      immortalwrt.org*** Can't find immortalwrt.org: No answer*** Can't find immortalwrt.org: No answer</code></pre><p>由此可见路由器中的dnsmasq无法解析<code>vercel.com</code></p><ol start="3"><li>考虑在用openClash,我优先从openClash中排查问题</li></ol><p>排查后发现,openClash中的DNS设置与路由器中的DNS设置不一致,导致路由器无法解析<code>vercel.com</code><br>路由器DNS设置中的dnsmasq转发<img no-lazy class="inline" src="/image/../image/openwrt/2024-06-15-05-05-49.png" style="height:100px;"/> 与 openClash中的DNS劫持<img no-lazy class="inline" src="/image/../image/openwrt/2024-06-15-05-05-08.png" style="height:100px;"/>冲突 选择性关掉一个即可</p>]]></content>
     
@@ -226,9 +226,9 @@
     
     <category term="school" scheme="https://yumi1.top/tags/school/"/>
     
-    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
-    
     <category term="WiFi" scheme="https://yumi1.top/tags/WiFi/"/>
+    
+    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
     
   </entry>
   
@@ -372,9 +372,9 @@
     
     <category term="school" scheme="https://yumi1.top/tags/school/"/>
     
-    <category term="Dr.com" scheme="https://yumi1.top/tags/Dr-com/"/>
-    
     <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
+    
+    <category term="Dr.com" scheme="https://yumi1.top/tags/Dr-com/"/>
     
   </entry>
   
