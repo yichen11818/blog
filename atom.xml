@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2024-08-09T15:10:42.861Z</updated>
+  <updated>2024-08-21T16:56:08.346Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>免费游戏修改器整合管理工具：Game Cheats Manager使用指南</title>
+    <link href="https://yumi1.top/game-cheats-manage/"/>
+    <id>https://yumi1.top/game-cheats-manage/</id>
+    <published>2024-08-21T16:15:03.000Z</published>
+    <updated>2024-08-21T16:56:08.346Z</updated>
+    
+    <content type="html"><![CDATA[<p>3DM<font color=red >整合</font>风灵月影 居然开始收会员费<br>最近找到一个非常方便的风灵月影整合器,可搜索游戏 自动翻译</p><blockquote><p>Game Cheats Manager 为玩家提供了一个高效管理游戏修改器的一站式解决方案。它允许用户在一个便捷的位置浏览、下载和管理所有修改器。每个修改器，通常是一个独立的可执行文件，都可以通过应用程序直接启动或删除，从而简化您的游戏体验。</p></blockquote><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/game-cheats-manage/2024-08-22-00-38-56.png"/></div></div><p>不多说 直接甩仓库地址 <a href="https://github.com/dyang886/Game-Cheats-Manager/releases">GameCheatsManager GITHUB仓库地址</a> 连不上github的<a class="btn-beautify outline blue larger" href="https://share.weiyun.com/qLfKuw3r"   title="腾迅微云点我下载"><i class="fa-solid fa-download"></i><span>腾迅微云点我下载</span></a></p><h2 id="使用指南">使用指南</h2><ol><li><p>打开软件后，点击<strong>更新</strong>按钮。<br><img src="../image/game-cheats-manage/2024-08-22-00-49-40.png" alt="点击更新"></p> <div class="tip warning"><p>如果更新过程中显示“更新风灵月影数据库失败”，可能需要使用VPN翻墙。</p></div></li><li><p>更新完成后，你可以在右侧的搜索框中进行联网搜索，并一键下载你需要的修改器。<br><img src="../image/game-cheats-manage/2024-08-22-00-50-25.png" alt="搜索并下载"></p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;3DM&lt;font color=red &gt;整合&lt;/font&gt;风灵月影 居然开始收会员费&lt;br&gt;
+最近找到一个非常方便的风灵月影整合器,可搜索游戏 自动翻译&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Game Cheats Manager 为玩家提供了一个高效管理游戏修改器的一站</summary>
+      
+    
+    
+    
+    
+    <category term="游戏修改器" scheme="https://yumi1.top/tags/%E6%B8%B8%E6%88%8F%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    
+    <category term="游戏管理" scheme="https://yumi1.top/tags/%E6%B8%B8%E6%88%8F%E7%AE%A1%E7%90%86/"/>
+    
+    <category term="风灵月影" scheme="https://yumi1.top/tags/%E9%A3%8E%E7%81%B5%E6%9C%88%E5%BD%B1/"/>
+    
+    <category term="Game Cheats Manager" scheme="https://yumi1.top/tags/Game-Cheats-Manager/"/>
+    
+    <category term="免费工具" scheme="https://yumi1.top/tags/%E5%85%8D%E8%B4%B9%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>IDM 最强下载工具2024.8.9激活教程</title>
@@ -524,27 +557,6 @@
     <category term="vpn" scheme="https://yumi1.top/tags/vpn/"/>
     
     <category term="vmware" scheme="https://yumi1.top/tags/vmware/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何注册Steam账号 验证码</title>
-    <link href="https://yumi1.top/steam/"/>
-    <id>https://yumi1.top/steam/</id>
-    <published>2023-08-28T13:51:01.000Z</published>
-    <updated>2024-04-26T05:44:57.582Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="原因分析">原因分析</h2><p>DNS污染和IP封锁导致steam无法注册,同时steam注册的验证码为谷歌提供的reCAPTCHA,注册不通过的主要原因<br>可能出现以下错误</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/steam.png"/></div></div><p>或401等报错</p><h2 id="解决方法">解决方法</h2><ul><li>下载以下工具:<a href="https://steampp.net/">Watt Toolkit</a>又叫steam++,一个多功能 Steam 工具箱<br><img src="/image/steam1.png" alt="" title="可勾选启动时自动启动加速"></li><li>将steam服务全部勾选,同时记得选择<code>国外验证码平台</code>,<code>全部启用</code></li></ul><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/steam3.png"/></div></div><ul><li>打开steam官网 <a href="https://store.steampowered.com/join/">https://store.steampowered.com/join/</a>,注册即可</li></ul><h2 id="后续">后续</h2><p>之后的steam社区 steam商店等等都会用到steam++ 你可在steam++的设置中设置steam++开机自启,自动加速,steam开机自启 ,steam开启不检测更新等</p><div class="tip info"><p>steam++不影响steam的下载速度,无需在下载游戏时关闭steam++,steam在国内有专用下载服务器,可在设置中选择离自己近的服务器</p></div><p><img src="/image/steam1.png" alt="" title="可勾选启动时自动启动加速"></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/steam++.png"/></div></div><p>详细信息可看<a href="https://yumi1.top/windows-optimize-2/#steam%E5%BF%85%E5%A4%87-Watt-Toolkit">windows-optimize-2/#steam必备-Watt-Toolkit</a></p>]]></content>
-    
-    
-    <summary type="html">解决steam注册时出现的 您对CAPTCHA的响应似乎无效。请在下方重新验证您不是机器人。(引用ID:3899521245869264202)</summary>
-    
-    
-    
-    <category term="技术学习" scheme="https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="steam" scheme="https://yumi1.top/tags/steam/"/>
     
   </entry>
   

@@ -1,2 +1,0 @@
-fsutil file setCaseSensitiveInfo "D:\SteamLibrary" disable
-fsutil file queryCaseSensitiveInfo "C:\path\to\your\directory"
