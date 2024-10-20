@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2024-10-02T02:51:00.000Z</updated>
+  <updated>2024-10-20T04:14:04.048Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql 8.0 error 1130 - Host &#39;my.an&#39; is not allowed to connect to this MySQL server</title>
+    <link href="https://yumi1.top/page/"/>
+    <id>https://yumi1.top/page/</id>
+    <published>2024-10-20T03:52:42.000Z</published>
+    <updated>2024-10-20T04:14:04.048Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述">问题描述</h2><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/page/2024-10-20-11-54-01.png"/></div></div><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1130 - Host &#x27;my.lan&#x27; is not allowed to connect to this MySQL server</span><br></pre></td></tr></table></figure><p>无法连接至远程mysql服务器，提示<code>Host 'my.lan' is not allowed to connect to this MySQL server</code></p><h2 id="解决方法">解决方法</h2><h3 id="1-mysql配置问题">1.mysql配置问题</h3><p>可能是mysql配置问题导致不允许远程连接，下面提供两种方式解决</p><ol><li>命令行修改权限<br>ssh或rdp进入服务器,root用户下执行<code>mysql -u root -p</code>输入密码，连接到mysql服务器</li></ol><p><em>更改用户权限</em>以允许远程连接：在MySQL命令行中，运行以下命令，其中 <code>user</code> 和 <code>password </code>修改为你允许远程连接的用户名和密码：<br>以下为mysql8.0版本的命令,mysql5.7版本的命令有所不同</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;user&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;user&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure><ol start="2"><li>修改mysql配置文件<br>找到mysql配置文件，一般在<code>/etc/my.cnf</code>或<code>/etc/mysql/mysql.conf.d/mysqld.cnf</code><br>搜索<code>bind-address</code>关键字，将<code>bind-address</code>改为<code>0.0.0.0</code>即可允许远程连接</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind-address = 0.0.0.0</span><br></pre></td></tr></table></figure><h3 id="2-防火墙问题">2.防火墙问题</h3><p>可能是防火墙问题导致不允许远程连接<br><em>查看防火墙状态</em></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld.service</span><br></pre></td></tr></table></figure><p><em>开启防火墙</em></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld.service</span><br></pre></td></tr></table></figure><p><em>允许mysql端口</em></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><p><em>重启mysql服务</em></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld.service</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">无法连接至远程mysql服务器，提示`Host &#39;my.lan&#39; is not allowed to connect to this MySQL server`,mysql 8.0 error 1130 - Host &#39;my.an&#39; is not allowed to connect to this MySQL server</summary>
+    
+    
+    
+    <category term="问题解决" scheme="https://yumi1.top/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+    
+    
+    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
+    
+    <category term="error" scheme="https://yumi1.top/tags/error/"/>
+    
+  </entry>
   
   <entry>
     <title>如何翻阅外国文献(翻墙)-Clash v2rayN 绿色上网</title>
@@ -532,31 +555,6 @@
     <category term="windows" scheme="https://yumi1.top/tags/windows/"/>
     
     <category term="优化" scheme="https://yumi1.top/tags/%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VMware ubuntu走本机代理clash for windows</title>
-    <link href="https://yumi1.top/linux-proxy/"/>
-    <id>https://yumi1.top/linux-proxy/</id>
-    <published>2023-09-11T02:00:29.000Z</published>
-    <updated>2024-04-04T21:49:20.510Z</updated>
-    
-    <content type="html"><![CDATA[<p>这里用ubuntu和clash for windows为例</p><h3 id="VMware设置">VMware设置</h3><p>打开vmware设置 将虚拟机网络设置为桥接模式</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (2).png"/></div></div><h3 id="查看本机ip">查看本机ip</h3><p>主机cmd输入 <code>ipconfig</code> 找到WLAN适配器的IPv4地址 并复制</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (3).png"/></div></div><h3 id="clash-for-windows设置">clash for windows设置</h3><p>打开 allow-lan 允许局域网<br>clash配置用tun模式和系统代理都可以<br>同时记住端口号,我这里是7890</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm.png"/></div></div><div class="tip bell"><p>注意,请保持随机混合端口为关闭状态</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm2.png"/></div></div></div><h3 id="虚拟机设置">虚拟机设置</h3><p>打开系统设置 找到网络-&gt;proxy-&gt;manual</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/wm (1).png"/></div></div><p>将ip设置为之前获取的本机ip 端口号设置为clash里写的7890</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm3.png"/></div></div><h2 id="可以访问外网了">可以访问外网了</h2><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/vm1.png"/></div></div>]]></content>
-    
-    
-    <summary type="html">VMware虚拟机如何通过clash for windows走主机代理 翻墙 VMware ubuntu走本机代理,VMware设置为桥接模式,clash for windows设置允许局域网,虚拟机设置代理为本机ip和端口</summary>
-    
-    
-    
-    <category term="技术学习" scheme="https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="vpn" scheme="https://yumi1.top/tags/vpn/"/>
-    
-    <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
-    
-    <category term="vmware" scheme="https://yumi1.top/tags/vmware/"/>
     
   </entry>
   
