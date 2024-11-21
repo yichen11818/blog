@@ -1,0 +1,22 @@
+name: "IndexNow"
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  check-and-submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: submit-to-bing
+        uses: bojieyang/indexnow-action@v1
+        with:
+          sitemap-location: "https://yumi1.top/sitemap.xml"  # change it
+          endpoint: "www.bing.com"
+          since: 1
+          # minite, hour, day, week, month, year
+          since-unit: "day"
+          limit: 100
+          key: ${{ secrets.INDEXNOW_KEY }}
+          key-location: ${{ secrets.INDEXNOW_KEY_LOCATION }}
