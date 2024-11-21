@@ -16,4 +16,4 @@
 [![.github/workflows/IndexNow.yml](https://github.com/yichen11818/blog/actions/workflows/IndexNow.yml/badge.svg)](https://github.com/yichen11818/blog/actions/workflows/IndexNow.yml)![Visitors](https://visitor-badge.glitch.me/badge?page_id=yichen11818.blog)
 
 # 添加友链
-前往issues添加友链 [添加友链](https://github.com/yichen11818/blog/issues/new?assignees=&labels=友链&template=invite-friend.md&title=[友链申请])
+前往issues添加友链 [添加友链](https://github.com/yichen11818/blog/issues/new?assignees=&labels=友链&template=友链申请.md&title=[友链申请])
