@@ -1,9 +1,11 @@
 name: "indexnow"
 on:
   push:
-    branches:
+    branches: 
       - master
-
+  schedule:
+    # scheduled in UTC.
+    - cron:  '0 0,12 * * *'
 
 jobs:
   check-and-submit:
