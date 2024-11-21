@@ -376,9 +376,9 @@
     
     <category term="school" scheme="https://yumi1.top/tags/school/"/>
     
-    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
-    
     <category term="WiFi" scheme="https://yumi1.top/tags/WiFi/"/>
+    
+    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
     
   </entry>
   
@@ -472,9 +472,9 @@
     <category term="技术学习" scheme="https://yumi1.top/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
-    
     <category term="linux" scheme="https://yumi1.top/tags/linux/"/>
+    
+    <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
     
     <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
     
@@ -499,9 +499,9 @@
     
     <category term="school" scheme="https://yumi1.top/tags/school/"/>
     
-    <category term="Dr.com" scheme="https://yumi1.top/tags/Dr-com/"/>
-    
     <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
+    
+    <category term="Dr.com" scheme="https://yumi1.top/tags/Dr-com/"/>
     
   </entry>
   
