@@ -1,9 +1,8 @@
 # 📚 传智考试答题助手
 
 一个基于油猴脚本的传智教育在线考试答题辅助工具。
-[![安装脚本](https://img.shields.io/badge/Greasy_Fork-安装脚本-66AA11?style=flat-square&logo=tampermonkey)](https://greasyfork.org/zh-CN/scripts/518464-传智网课答题-支持选填)
-[![版本](https://img.shields.io/badge/版本-v3.2-blue?style=flat-square)](https://greasyfork.org/zh-CN/scripts/
-518464-传智网课答题-支持选填)
+[![安装脚本](https://img.shields.io/badge/Greasy_Fork-安装脚本-66AA11?style=flat-square&logo=tampermonkey)](https://greasyfork.org/zh-CN/scripts/518464-传智考试答题-支持选填)
+[![版本](https://img.shields.io/badge/版本-v3.3-blue?style=flat-square)](https://greasyfork.org/zh-CN/scripts/518464-传智考试答题-支持选填)
 [![许可证](https://img.shields.io/badge/许可证-MIT-yellow?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/yichen11818/stu_ityxb?style=flat-square)](https://github.com/yichen11818/stu_ityxb/stargazers)
 [![Issues](https://img.shields.io/github/issues/yichen11818/stu_ityxb?style=flat-square)](https://github.com/yichen11818/stu_ityxb/issues)
@@ -66,8 +65,8 @@ const API_URL = 'https://openai.proxy.com/v1/chat/completions';
 
 ## 👥 贡献者
 
-- 🥔 原作者：土豆
-- 🌟 二开作者：HCG_Sky
+- 🥔 原作者：[土豆](https://greasyfork.org/zh-CN/users/733754-xiaobaidadada)
+- 🌟 二开作者：[HCG_Sky](https://greasyfork.org/zh-CN/users/996508-hcg-sky)
 - ✨ 三开作者：yichen11818
 
 ## 📝 更新日志
