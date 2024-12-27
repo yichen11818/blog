@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2024-12-03T01:57:24.253Z</updated>
+  <updated>2024-11-21T05:04:46.883Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,19 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>page</title>
-    <link href="https://yumi1.top/unicloud-3/"/>
-    <id>https://yumi1.top/unicloud-3/</id>
-    <published>2024-12-03T01:57:24.000Z</published>
-    <updated>2024-12-03T01:57:24.253Z</updated>
-    
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>微信小程序开发笔记-2 基础语法</title>
@@ -542,6 +529,33 @@
     <category term="超星" scheme="https://yumi1.top/tags/%E8%B6%85%E6%98%9F/"/>
     
     <category term="学习通" scheme="https://yumi1.top/tags/%E5%AD%A6%E4%B9%A0%E9%80%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>步道乐跑破解校园跑 fake location GG修改器</title>
+    <link href="https://yumi1.top/school-campus-running/"/>
+    <id>https://yumi1.top/school-campus-running/</id>
+    <published>2023-10-12T06:29:57.000Z</published>
+    <updated>2024-09-19T13:00:48.783Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在最前">写在最前</h2><div class="tip "><p>此贴仅为技术研究分析,使用模拟器或fake location有一定风险,请勿将此教程用于贩卖,使用程序造成的后果自行承担</p></div><p>本文以步道乐跑为例,众所周知步道乐跑的跑步数据是通过手机定位获取的,因此可以通过模拟定位来完成跑步,但是对于部分需要步数与GPS定位检测的校园跑应用来说可能不适用<br>步道乐跑在使用本机环境不带ROOT,不使用步频模拟的情况下系统检测通过,但是<font size=6 color=red>步数过少</font>不一定能通过人工检测,<font size=6 color=red>有可能被检测</font>请有能力ROOT尽量ROOT,ROOT后记得隐藏ROOT与magisk hide</p><h2 id="前置条件">前置条件</h2><p>一部安卓手机 带root权限的最好(如果不懂请忽略)<br>下载Fake Location</p><a class="btn-beautify outline" href="https://yumi1.lanzouw.com/iE07q1blpgmh"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a><h2 id="打开开发者选项">打开开发者选项</h2><ol><li>打开手机设置</li><li>找到<code>关于手机</code> 里面有<code>版本号</code> 点击 <code>版本号</code> 3次即可打开开发者选项<br>如小米则点击miui版本点击三次即可打开开发者模式</li></ol> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (7).webp"/></div></div><p>如果未能找到请自行搜索</p> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (1).webp"/></div></div><ol start="3"><li>打开开发者选项</li></ol> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (6).webp"/></div></div> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (5).webp"/></div></div> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (3).webp"/></div></div><p>选择<code>fake location</code></p> <div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (4).webp"/></div></div><h2 id="打开-fake-location">打开 fake location</h2><h3 id="位置模拟"><code>位置模拟</code></h3><p>打开<code>位置模拟</code>,选择位置,点击<code>摇杆</code>后点击<code>启动模拟</code><br>选择NOROOT模式,选择NOROOT模式</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (9).webp"/></div></div><p>此时你会发现你到达你刚刚选择的位置了,使用摇杆即可模拟跑步</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (8).webp"/></div></div><p>这里可以调节速度</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012 (10).webp"/></div></div><p>ROOT用户请去app设置开启&quot;隐藏ROOT&quot; “模拟GPS信号” “步频模拟”</p><h3 id="路线模拟"><code>路线模拟</code></h3><p>选择NOROOT模式<br>打开<code>路线模拟</code>,自行规划路线,点击<code>启动模拟</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/20231012.webp"/></div></div><h2 id="注意">注意</h2><p>使用fake location具有一定风险性,推荐root用户启用步频模拟的情况下使用,本文描述较乱,请自行摸索,有问题请留言</p><div class="tip "><p>不root是可以使用的,但是不root不能同时修改步数,可能造成跑两公里但是步数只有200步的情况,经我本人测试是可以通过但是会不会被人工查就不知道了</p></div><h2 id="关于虚拟机">关于虚拟机</h2><p>电脑上的各种安卓模拟器都<mark class="hl-label default">不可使用</mark> ,MUMU模拟器,雷神模拟器,BlueStacks模拟器等均无法运行fake location,推荐<code>有一定动手能力的</code>,<code>追求无风险的</code>,<code>或者上述方法无法用的</code>拿实体机进行root并进行magisk hide,root hide</p><h2 id="GG修改器">GG修改器</h2><p>GG修改器是一款修改数据的软件,可以修改公里数,修改步数,修改跑步速度等,本文不做介绍</p><a class="btn-beautify outline blue larger" href="https://yumi1.lanzn.com/iBhjh2ac7d9e"   title="lua脚本下载链接"><i class="fa-solid fa-download"></i><span>lua脚本下载链接</span></a>]]></content>
+    
+    
+    <summary type="html">本文以步道乐跑为例,众所周知步道乐跑的跑步数据是通过手机定位获取的,因此可以通过模拟定位来完成跑步,但是对于部分需要步数与GPS定位检测的校园跑应用来说可能不适用</summary>
+    
+    
+    
+    <category term="大学小技巧" scheme="https://yumi1.top/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="school" scheme="https://yumi1.top/tags/school/"/>
+    
+    <category term="校园跑" scheme="https://yumi1.top/tags/%E6%A0%A1%E5%9B%AD%E8%B7%91/"/>
+    
+    <category term="fake location" scheme="https://yumi1.top/tags/fake-location/"/>
+    
+    <category term="root" scheme="https://yumi1.top/tags/root/"/>
     
   </entry>
   
