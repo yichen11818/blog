@@ -6,7 +6,7 @@
   <link href="https://yumi1.top/atom.xml" rel="self"/>
   
   <link href="https://yumi1.top/"/>
-  <updated>2025-01-31T17:10:31.867Z</updated>
+  <updated>2025-02-08T16:38:26.028Z</updated>
   <id>https://yumi1.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>今天,2025.02.09,最大的油猴脚本网站greasyfork已被gfw屏蔽</title>
+    <link href="https://yumi1.top/greasyfork/"/>
+    <id>https://yumi1.top/greasyfork/</id>
+    <published>2025-02-08T16:09:08.000Z</published>
+    <updated>2025-02-08T16:38:26.028Z</updated>
+    
+    <content type="html"><![CDATA[<p>日前,最大的油猴脚本网站greasyfork已被gfw屏蔽,全国无法访问.<br>无法访问</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/greasyfork/2025-02-09-00-12-21.png"/></div></div><p>全国无法解析</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/greasyfork/2025-02-09-00-11-09.png"/></div></div><p>正常dns解析</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/greasyfork/2025-02-09-00-32-45.png"/></div></div><p>被污染的dns</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/greasyfork/2025-02-09-00-32-57.png"/></div></div><blockquote><p>greasyfork 是一个下载油猴脚本的网站<br>油猴脚本是一段代码，它们能够<strong>优化您的网页浏览体验</strong>。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。在 Greasy Fork 上的用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。</p></blockquote><h2 id="相关链接">相关链接</h2><ul><li><a href="https://yumi1.top/windows-optimize-1">Windows 浏览器优化指南</a> 获取更多油猴脚本资源</li><li><a href="http://yumi1.top/vpn">科学上网如何使用</a> 绕过 GFW 访问</li><li><a href="https://greasyfork.org">Greasy Fork 官网</a></li><li><a href="https://www.tampermonkey.net/">Tampermonkey 官网</a></li><li><a href="https://greasyfork.org/zh-CN/help/installing-user-scripts">如何安装油猴脚本</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;日前,最大的油猴脚本网站greasyfork已被gfw屏蔽,全国无法访问.&lt;br&gt;
+无法访问&lt;/p&gt;
+&lt;div class=&quot;img-wrap&quot;&gt;&lt;div class=&quot;img-bg&quot;&gt;&lt;img class=&quot;img&quot; src=&quot;/image/../image/greasy</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>微信小程序提审小技巧</title>
@@ -536,31 +558,6 @@
     <category term="mysql" scheme="https://yumi1.top/tags/mysql/"/>
     
     <category term="安装" scheme="https://yumi1.top/tags/%E5%AE%89%E8%A3%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>校园网开机自动拨号+断线重连 Drcom(p)</title>
-    <link href="https://yumi1.top/school-net/"/>
-    <id>https://yumi1.top/school-net/</id>
-    <published>2023-10-19T05:31:58.000Z</published>
-    <updated>2024-05-13T08:25:23.131Z</updated>
-    
-    <content type="html"><![CDATA[<p><font size=6 color=red>本方案可代替校园网拨号软件,实现开机自动拨号,断线秒连</font><br>校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</p><h2 id="校园网分析">校园网分析</h2><p>我校使用的Drcom(p版)拨号客户端,无网页认证,抓包及查看系统日志可见此软件即为pppoe拨号软件,宽带账号及密码可在网络设置中查看</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/net.webp"/></div></div><h2 id="拨号">拨号</h2><p>打开<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code><br><code>设置新连接</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh1.webp"/></div></div><p><code>连接到internet</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (5).webp"/></div></div><p><code>设置新连接</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (4).webp"/></div></div><p><code>创建新连接</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (3).webp"/></div></div><p><code>宽带</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (1).webp"/></div></div><p>如果是联通则用户名为<code>学号@unicom</code>,密码为<code>身份证后六位</code><br>移动用户名为<code>学号@cmcc</code>,密码为<code>身份证后六位</code><br>电信用户名为<code>学号@telecom</code>,密码为<code>身份证后六位</code><br>如</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018xxxxxx@unicom</span><br></pre></td></tr></table></figure><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bbh (2).webp"/></div></div><p>注意, 链接名称为 <code>net</code><br>然后点击链接即可</p><p>下载以下脚本,并解压到任意位置</p><a class="btn-beautify outline" href="https://yumi1.lanzouw.com/iwiza1c75pgh"   title="下载链接"><i class="fa-solid fa-download"></i><span>下载链接</span></a><p>右键<code>拨号.bat</code>-&gt;<code>编辑</code>将内容修改为自己的</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh4.webp"/></div></div><p>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code><br>如</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@rasdial net 2018xxxxxx@unicom 123456</span><br></pre></td></tr></table></figure><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh3.webp"/></div></div><p>修改完后双击<code>拨号.bat</code>即可进行联网  秒连校园网成功 可将这个.bat文件丢到桌面 双击就可实现拨号</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/bh2.webp"/></div></div><h2 id="断线自动重连-开机自动拨号">断线自动重连 开机自动拨号</h2><p>使用<code>任务管理计划</code>实现断网自动重连</p><p><i class="fa-brands fa-windows"></i> + <kbd>R</kbd>输入<code>taskschd.msc</code>回车</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{B8588708-6437-4716-A455-2A1CB512A5D4}.webp"/></div></div><p>导入任务</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{0A2C842D-B3AF-4672-A6A6-826624A8FBCE}.webp"/></div></div><p>导入之前下载的压缩包里的<code>自动联网.xml</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{95341A0A-DA19-481a-9867-229210548D44}.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{3857AF9D-E744-4e5b-A5DA-85DA1DCA8E04}.webp"/></div></div><p>修改为自己的<br>联通的后缀为<code>@unicom</code><br>移动的后缀为<code>@cmcc</code><br>电信的后缀为<code>@telecom</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/{7ABA55D8-FCEA-498c-90DB-6003116CC9E1}.webp"/></div></div><p>确定即可</p><p>断线就会自动重连了</p><h2 id="善后">善后</h2><ul><li>删除掉学校的客户端</li><li>删除<code>设置</code>-&gt;<code>网络</code>-&gt;<code>拨号</code>界面中名为Dr.com的拨号链接<br>重启电脑 自动拨号成功即可</li></ul>]]></content>
-    
-    
-    <summary type="html">本方案可代替江西理工大学/赣南科技学院/江西理工大学应用科技学院 Drcom(p)校园网拨号软件,实现开机自动拨号,断线秒连,校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</summary>
-    
-    
-    
-    <category term="大学小技巧" scheme="https://yumi1.top/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-    
-    <category term="school" scheme="https://yumi1.top/tags/school/"/>
-    
-    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
-    
-    <category term="Dr.com" scheme="https://yumi1.top/tags/Dr-com/"/>
     
   </entry>
   
