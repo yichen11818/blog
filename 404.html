@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>页面没有找到 | Yumi's Blog</title><meta name="author" content="Yichen"><meta name="copyright" content="Yichen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="欢迎来到 Yumi 的技术博客！这里是一个分享编程学习、技术探索的温馨小站。主要记录 Hexo、Java、Python、Linux 等技术笔记,同时也会分享一些生活感悟。希望通过文字记录成长,也期待与你一起进步！">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Yumi's Blog | Yumi's Blog</title><meta name="author" content="Yichen"><meta name="copyright" content="Yichen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="欢迎来到 Yumi 的技术博客！这里是一个分享编程学习、技术探索的温馨小站。主要记录 Hexo、Java、Python、Linux 等技术笔记,同时也会分享一些生活感悟。希望通过文字记录成长,也期待与你一起进步！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yumi&#39;s Blog">
 <meta property="og:url" content="https://yumi1.top/404.html">
@@ -9,23 +9,115 @@
 <meta property="article:author" content="Yichen">
 <meta property="article:tag" content="计算机,windows,java,python,linux,hexo,git,github,markdown,博客,个人博客,技术博客,程序员,程序员博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yumi1.top/img/tx.webp"><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/404.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/5.0.33/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<meta name="twitter:image" content="https://yumi1.top/img/tx.webp"><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/404.html"><link rel="preconnect" href="//unpkg.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 8 || hour >= 22
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: undefined,
   translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
+  runtime: '',
   dateSuffix: {
     just: '刚刚',
     min: '分钟前',
@@ -34,277 +126,73 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://unpkg.com/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
-  islazyload: false,
-  isAnchor: true,
+  islazyloadPlugin: false,
+  isAnchor: false,
   percent: {
     toc: true,
     rightside: false,
   },
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '页面没有找到',
-  isPost: false,
-  isHome: false,
+  title: 'Yumi\'s Blog',
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-06-11 20:47:18'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const now = new Date()
-          const hour = now.getHours()
-          const isNight = hour <= 8 || hour >= 22
-          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-          else if (t === 'light') activateLightMode()
-          else activateDarkMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tx.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="error404" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Yumi's Blog"><img class="site-icon" src="/img/3.ico"/><span class="site-name">Yumi's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><div id="error-wrap"><div class="error-content"><div class="error-img"><img src="https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png" alt="Page not found"></div><div class="error-info"><h1 class="error_title">404</h1><div class="error_subtitle">不见了...</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/5.0.33/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.staticfile.org/instant.page/5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.staticfile.org/pangu/4.0.7/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
-
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
-
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
-  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
-  if ($mermaid.length === 0) return
-  const runMermaid = () => {
+  pageType: 'page'
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page type-404" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">Yumi's Blog</h1></header><main class="layout hide-aside" id="content-inner"><div class="nc" id="page"><div class="error-content"><div class="error-img"><img src="https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png" alt="Page not found"></div><div class="error-info"><h1 class="error_title">404</h1><div class="error_subtitle">不见了...</div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/instant.page/instantpage.js" type="module"></script><script src="https://unpkg.com/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
     window.loadMermaid = true
     const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
 
-    Array.from($mermaid).forEach((item, index) => {
+    ele.forEach((item, index) => {
       const mermaidSrc = item.firstElementChild
-      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
-      const mermaidID = 'mermaid-' + index
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
       const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
 
       const renderFn = mermaid.render(mermaidID, mermaidDefinition)
-
-      const renderV10 = () => {
-        renderFn.then(({svg}) => {
-          mermaidSrc.insertAdjacentHTML('afterend', svg)
-        })
-      }
-
-      const renderV9 = svg => {
+      const renderMermaid = svg => {
         mermaidSrc.insertAdjacentHTML('afterend', svg)
       }
 
-      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
     })
   }
 
   const loadMermaid = () => {
-    window.loadMermaid ? runMermaid() : getScript('https://cdn.staticfile.org/mermaid/10.8.0/mermaid.min.js').then(runMermaid)
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(runMermaidFn)
   }
 
-  btf.addModeChange('mermaid', runMermaid)
-
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
   window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
-})()</script></div><script>window.addEventListener('load', () => {
-  const changeContent = (content) => {
-    if (content === '') return content
-
-    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
-    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
-    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
-    content = content.replace(/<[^>]+>/g,"") // remove html tag
-
-    if (content.length > 150) {
-      content = content.substring(0,150) + '...'
-    }
-    return content
-  }
-
-  const getComment = () => {
-    const runTwikoo = () => {
-      twikoo.getRecentComments({
-        envId: 'https://commityumi.netlify.app/.netlify/functions/twikoo',
-        region: '',
-        pageSize: 6,
-        includeReply: true
-      }).then(function (res) {
-        const twikooArray = res.map(e => {
-          return {
-            'content': changeContent(e.comment),
-            'avatar': e.avatar,
-            'nick': e.nick,
-            'url': e.url + '#' + e.id,
-            'date': new Date(e.created).toISOString()
-          }
-        })
-
-        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
-        generateHtml(twikooArray)
-      }).catch(function (err) {
-        const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
-      })
-    }
-
-    if (typeof twikoo === 'object') {
-      runTwikoo()
-    } else {
-      getScript('https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js').then(runTwikoo)
-    }
-  }
-
-  const generateHtml = array => {
-    let result = ''
-
-    if (array.length) {
-      for (let i = 0; i < array.length; i++) {
-        result += '<div class=\'aside-list-item\'>'
-
-        if (true) {
-          const name = 'src'
-          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
-        }
-        
-        result += `<div class='content'>
-        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
-        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
-        </div></div>`
-      }
-    } else {
-      result += '没有评论'
-    }
-
-    let $dom = document.querySelector('#card-newest-comments .aside-list')
-    $dom.innerHTML= result
-    window.lazyLoadInstance && window.lazyLoadInstance.update()
-    window.pjax && window.pjax.refresh($dom)
-  }
-
-  const newestCommentInit = () => {
-    if (document.querySelector('#card-newest-comments .aside-list')) {
-      const data = saveToLocal.get('twikoo-newest-comments')
-      if (data) {
-        generateHtml(JSON.parse(data))
-      } else {
-        getComment()
-      }
-    }
-  }
-
-  newestCommentInit()
-  document.addEventListener('pjax:complete', newestCommentInit)
-})</script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://unpkg.com/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>

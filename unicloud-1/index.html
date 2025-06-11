@@ -14,23 +14,130 @@
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="微信小程序">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img.paulzzh.com/touhou/random?1938"><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/unicloud-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/5.0.33/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<meta name="twitter:image" content="https://img.paulzzh.com/touhou/random?1938"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "微信小程序开发笔记-1 云函数环境准备 和 基础配置",
+  "url": "https://yumi1.top/unicloud-1/",
+  "image": "https://img.paulzzh.com/touhou/random?1938",
+  "datePublished": "2024-11-20T17:38:40.000Z",
+  "dateModified": "2025-01-31T16:44:47.404Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Yichen",
+      "url": "https://yumi1.top/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/unicloud-1/index.html"><link rel="preconnect" href="//unpkg.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 8 || hour >= 22
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: undefined,
   translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
+  runtime: '',
   dateSuffix: {
     just: '刚刚',
     min: '分钟前',
@@ -39,17 +146,15 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://unpkg.com/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
-  islazyload: false,
-  isAnchor: true,
+  islazyloadPlugin: false,
+  isAnchor: false,
   percent: {
     toc: true,
     rightside: false,
@@ -57,120 +162,11 @@
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: '微信小程序开发笔记-1 云函数环境准备 和 基础配置',
-  isPost: true,
-  isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2025-02-01 00:44:47'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const now = new Date()
-          const hour = now.getHours()
-          const isNight = hour <= 8 || hour >= 22
-          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-          else if (t === 'light') activateLightMode()
-          else activateDarkMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tx.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://img.paulzzh.com/touhou/random?1938')"><nav id="nav"><span id="blog-info"><a href="/" title="Yumi's Blog"><img class="site-icon" src="/img/3.ico"/><span class="site-name">Yumi's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">微信小程序开发笔记-1 云函数环境准备 和 基础配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-20T17:38:40.000Z" title="发表于 2024-11-21 01:38:40">2024-11-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-31T16:44:47.404Z" title="更新于 2025-02-01 00:44:47">2025-02-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/">技术学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="微信小程序开发笔记-1 云函数环境准备 和 基础配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="写在最前">写在最前</h2>
+  pageType: 'post'
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://img.paulzzh.com/touhou/random?1938);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">微信小程序开发笔记-1 云函数环境准备 和 基础配置</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">微信小程序开发笔记-1 云函数环境准备 和 基础配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-20T17:38:40.000Z" title="发表于 2024-11-21 01:38:40">2024-11-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-31T16:44:47.404Z" title="更新于 2025-02-01 00:44:47">2025-02-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/">技术学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="写在最前">写在最前</h2>
 <div class="tip "><p>本系列文章记录我在unicloud开发过程中的一些流程和踩坑</p>
 </div>
 <h2 id="一、安装HBuilderX">一、安装HBuilderX</h2>
@@ -239,61 +235,59 @@
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[^1]"></span><a class="reference-anchor" href="#referto_[^1]">[^1]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://uniapp.dcloud.net.cn/uniCloud/">uniCloud官方文档</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[^2]"></span><a class="reference-anchor" href="#referto_[^2]">[^2]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://uniapp.dcloud.net.cn/">uni-app官方教程</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[^3]"></span><a class="reference-anchor" href="#referto_[^3]">[^3]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://uniapp.dcloud.net.cn/uniCloud/cf-functions.html">uniCloud云函数文档</a></div>
-<div class="reference-source"><span class="hidden-anchor" id="referfrom_[^4]"></span><a class="reference-anchor" href="#referto_[^4]">[^4]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://uniapp.dcloud.net.cn/uniCloud/cf-database.html">uniCloud数据库文档</a></div></article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>微信小程序开发笔记-1 云函数环境准备 和 基础配置</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://yumi1.top/unicloud-1/">https://yumi1.top/unicloud-1/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>Yichen</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2024-11-21</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2025-02-01</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener external nofollow noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener external nofollow noreferrer" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/uniapp/">uniapp</a><a class="post-meta__tags" href="/tags/unicloud/">unicloud</a><a class="post-meta__tags" href="/tags/vue/">vue</a><a class="post-meta__tags" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></div><div class="post_share"><div class="addtoany"><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_button_twitter"></a><a class="a2a_button_google_gmail"></a><a class="a2a_button_reddit"></a><a class="a2a_button_wechat"></a><a class="a2a_button_qzone"></a><a class="a2a_dd" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.addtoany.com/share"></a></div></div><script async="async" src="https://static.addtoany.com/menu/page.js"></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/unicloud-4/" title="微信小程序提审小技巧"><img class="cover" src="/image/../image/unicloud-4/2025-02-01-01-06-32.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-01</div><div class="title">微信小程序提审小技巧</div></div></a></div><div><a href="/unicloud-3/" title="微信小程序开发笔记-3  VUE uniapp unicloud"><img class="cover" src="https://img.paulzzh.com/touhou/random?8330" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-01</div><div class="title">微信小程序开发笔记-3  VUE uniapp unicloud</div></div></a></div><div><a href="/unicloud-5/" title="微信小程序 自定义tabbar switchTab报错 can not switch to xxx page"><img class="cover" src="https://img.paulzzh.com/touhou/random?1809" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="title">微信小程序 自定义tabbar switchTab报错 can not switch to xxx page</div></div></a></div><div><a href="/unicloud-6/" title="微信小程序图片优化实战：缓存+压缩"><img class="cover" src="https://img.paulzzh.com/touhou/random?4900" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="title">微信小程序图片优化实战：缓存+压缩</div></div></a></div><div><a href="/unicloud-7/" title="微信小程序实战：WebView上悬浮操作组件"><img class="cover" src="https://img.paulzzh.com/touhou/random?3860" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="title">微信小程序实战：WebView上悬浮操作组件</div></div></a></div><div><a href="/unicloud-2/" title="微信小程序开发笔记-2 基础语法"><img class="cover" src="https://img.paulzzh.com/touhou/random?5116" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-21</div><div class="title">微信小程序开发笔记-2 基础语法</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D"><span class="toc-text">写在最前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85HBuilderX"><span class="toc-text">一、安装HBuilderX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BAuniCloud%E9%A1%B9%E7%9B%AE"><span class="toc-text">二、创建uniCloud项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E4%BA%91%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4"><span class="toc-text">三、配置云服务空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">四、安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="toc-text">五、目录结构说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">六、常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">第二部分：基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-text">一、项目配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-manifest-json%E9%85%8D%E7%BD%AE"><span class="toc-text">1. manifest.json配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pages-json%E9%85%8D%E7%BD%AE"><span class="toc-text">2. pages.json配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%91%E5%87%BD%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-text">二、云函数配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BA%91%E5%87%BD%E6%95%B0"><span class="toc-text">1. 创建云函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BA%91%E5%87%BD%E6%95%B0%E7%A4%BA%E4%BE%8B"><span class="toc-text">2. 云函数示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B0%83%E7%94%A8%E4%BA%91%E5%87%BD%E6%95%B0"><span class="toc-text">3. 调用云函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">三、数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88"><span class="toc-text">1. 创建集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">2. 数据库操作示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-text">拓展阅读</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: linear-gradient( 135deg,#E2B0FF 10%,#9F44D3 100%)"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/5.0.33/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.staticfile.org/instant.page/5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.staticfile.org/pangu/4.0.7/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
-
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
-
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
-  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
-  if ($mermaid.length === 0) return
-  const runMermaid = () => {
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[^4]"></span><a class="reference-anchor" href="#referto_[^4]">[^4]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://uniapp.dcloud.net.cn/uniCloud/cf-database.html">uniCloud数据库文档</a></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/unicloud-1/">https://yumi1.top/unicloud-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/uniapp/">uniapp</a><a class="post-meta__tags" href="/tags/unicloud/">unicloud</a><a class="post-meta__tags" href="/tags/vue/">vue</a><a class="post-meta__tags" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></div><div class="post-share"><div class="social-share" data-image="https://img.paulzzh.com/touhou/random?1938" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/unicloud-4/" title="微信小程序提审小技巧"><img class="cover" src="/image/../image/unicloud-4/2025-02-01-01-06-32.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-01</div><div class="info-item-2">微信小程序提审小技巧</div></div><div class="info-2"><div class="info-item-1">审核失败:原因存在运营内容不完整问题，违反《微信小程序平台运营规范常见拒绝情形3.3》</div></div></div></a><a class="pagination-related" href="/unicloud-3/" title="微信小程序开发笔记-3  VUE uniapp unicloud"><img class="cover" src="https://img.paulzzh.com/touhou/random?8330" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-01</div><div class="info-item-2">微信小程序开发笔记-3  VUE uniapp unicloud</div></div><div class="info-2"><div class="info-item-1">写在最前 小型项目中 使用VUE 和 uniapp 开发 使用uniCloud作为云开发服务 技术栈为VUE3+uniapp3+uniCloud,第一个项目纯手撸没用模板框架,应该考虑tdesign的 一、组件通信  父子组件通信  123456789101112131415161718&lt;!-- 父组件 --&gt;&lt;template&gt;  &lt;child-component :msg=&quot;message&quot; @onCallback=&quot;handleCallback&quot;/&gt;&lt;/template&gt;&lt;!-- 子组件 --&gt;&lt;script&gt;export default &#123;  props: &#123;    msg: String  &#125;,  methods: &#123;    sendToParent() &#123;      this.$emit(&#x27;onCallback&#x27;, &#x27;来自子组件的数据&#x27;)    &#125; ...</div></div></div></a><a class="pagination-related" href="/unicloud-5/" title="微信小程序 自定义tabbar switchTab报错 can not switch to xxx page"><img class="cover" src="https://img.paulzzh.com/touhou/random?1809" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="info-item-2">微信小程序 自定义tabbar switchTab报错 can not switch to xxx page</div></div><div class="info-2"><div class="info-item-1">问题描述 微信小程序 自定义tabbar switchTab报错 can not switch to xxx page 123456789101112Error: MiniProgramError&#123;&quot;errMsg&quot;:&quot;switchTab:fail can not switch to no-tabBar page&quot;&#125;    at Object.errorReport (WAServiceMainContext.js?t=wechat&amp;s=1741106172521&amp;v=3.6.5:1)    at Function.thirdErrorReport (WAServiceMainContext.js?t=wechat&amp;s=1741106172521&amp;v=3.6.5:1)    at Object.thirdErrorReport (WAServiceMainContext.js?t=wechat&amp;s=1741106172521&amp;v=3.6.5:1)    at i...</div></div></div></a><a class="pagination-related" href="/unicloud-6/" title="微信小程序图片优化实战：缓存+压缩"><img class="cover" src="https://img.paulzzh.com/touhou/random?4900" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="info-item-2">微信小程序图片优化实战：缓存+压缩</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/unicloud-7/" title="微信小程序实战：WebView上悬浮操作组件"><img class="cover" src="https://img.paulzzh.com/touhou/random?3860" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="info-item-2">微信小程序实战：WebView上悬浮操作组件</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/unicloud-2/" title="微信小程序开发笔记-2 基础语法"><img class="cover" src="https://img.paulzzh.com/touhou/random?5116" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-21</div><div class="info-item-2">微信小程序开发笔记-2 基础语法</div></div><div class="info-2"><div class="info-item-1">微信小程序开发基础语法总结,包括文件结构、生命周期、数据绑定等核心概念</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D"><span class="toc-number">1.</span> <span class="toc-text">写在最前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85HBuilderX"><span class="toc-number">2.</span> <span class="toc-text">一、安装HBuilderX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BAuniCloud%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text">二、创建uniCloud项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E4%BA%91%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4"><span class="toc-number">4.</span> <span class="toc-text">三、配置云服务空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">5.</span> <span class="toc-text">四、安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="toc-number">6.</span> <span class="toc-text">五、目录结构说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">7.</span> <span class="toc-text">六、常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">第二部分：基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">一、项目配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-manifest-json%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">1. manifest.json配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pages-json%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">2. pages.json配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%91%E5%87%BD%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">二、云函数配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BA%91%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1. 创建云函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BA%91%E5%87%BD%E6%95%B0%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">2. 云函数示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B0%83%E7%94%A8%E4%BA%91%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.</span> <span class="toc-text">3. 调用云函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">三、数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88"><span class="toc-number">3.1.</span> <span class="toc-text">1. 创建集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2. 数据库操作示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">4.</span> <span class="toc-text">拓展阅读</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/instant.page/instantpage.js" type="module"></script><script src="https://unpkg.com/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
     window.loadMermaid = true
     const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
 
-    Array.from($mermaid).forEach((item, index) => {
+    ele.forEach((item, index) => {
       const mermaidSrc = item.firstElementChild
-      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
-      const mermaidID = 'mermaid-' + index
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
       const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
 
       const renderFn = mermaid.render(mermaidID, mermaidDefinition)
-
-      const renderV10 = () => {
-        renderFn.then(({svg}) => {
-          mermaidSrc.insertAdjacentHTML('afterend', svg)
-        })
-      }
-
-      const renderV9 = svg => {
+      const renderMermaid = svg => {
         mermaidSrc.insertAdjacentHTML('afterend', svg)
       }
 
-      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
     })
   }
 
   const loadMermaid = () => {
-    window.loadMermaid ? runMermaid() : getScript('https://cdn.staticfile.org/mermaid/10.8.0/mermaid.min.js').then(runMermaid)
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(runMermaidFn)
   }
 
-  btf.addModeChange('mermaid', runMermaid)
-
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
   window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
 })()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
   const getCount = () => {
     const countELement = document.getElementById('twikoo-count')
     if(!countELement) return
@@ -302,29 +296,45 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
       region: '',
       urls: [window.location.pathname],
       includeReply: false
-    }).then(function (res) {
+    }).then(res => {
       countELement.textContent = res[0].count
     }).catch(err => {
       console.error(err)
     })
   }
 
-  const init = () => {
-    twikoo.init(Object.assign({
-      el: '#twikoo-wrap',
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
       envId: 'https://commityumi.netlify.app/.netlify/functions/twikoo',
       region: '',
       onCommentLoaded: () => {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
-      }
-    }, null))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
     
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
   }
 
-  const loadTwikoo = () => {
-    if (typeof twikoo === 'object') setTimeout(init,0)
-    else getScript('https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js').then(init)
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://unpkg.com/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
   }
 
   if ('Twikoo' === 'Twikoo' || !true) {
@@ -333,28 +343,47 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
   } else {
     window.loadOtherComment = loadTwikoo
   }
-})()</script><script>function loadLivere () {
-  if (typeof LivereTower === 'object') {
-    window.LivereTower.init()
-  }
-  else {
-    (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-    })(document, 'script');
-  }
-}
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
 
-if ('Twikoo' === 'Livere' || !true) {
-  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
-  else loadLivere()
-}
-else {
-  function loadOtherComment () {
-    loadLivere()
+  const loadLivere = (el, path) => {
+    window.livereOptions = {
+      refer: path || location.pathname
+    }
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyLivere = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
   }
-}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Livere'
+      ? window.shuoshuoComment = { loadComment: loadLivere }
+      : window.loadOtherComment = loadLivere
+    return
+  }
+
+  if ('Twikoo' === 'Livere' || !true) {
+    if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://unpkg.com/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
