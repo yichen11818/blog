@@ -5,29 +5,29 @@
 <meta property="og:site_name" content="Yumi&#39;s Blog">
 <meta property="og:description" content="一、选择题(共20题, 每题2分, 共40分)  通常所说的“三网”不包括(查看答案B) A 电信网络 B 物联网 C.电视网络 D.计算机网络 计算机网络中可以共享的资源包括( 查看答案B) A.客户机和服务器 B.硬件.软件和数据 C.主机.CPU.内存和外部设备 D.计算机和传输媒体 调制解调器MODEM的主要功能是 (查看答案C) A.模拟信号的放大 B.数字信号的整形 C.模拟信号与数字">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.paulzzh.com/touhou/random?5098">
+<meta property="og:image" content="https://img.paulzzh.com/touhou/random">
 <meta property="article:published_time" content="2024-05-20T10:43:54.000Z">
 <meta property="article:modified_time" content="2025-05-07T15:11:14.559Z">
 <meta property="article:author" content="Yichen">
 <meta property="article:tag" content="考试">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img.paulzzh.com/touhou/random?5098"><script type="application/ld+json">{
+<meta name="twitter:image" content="https://img.paulzzh.com/touhou/random"><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "计网期末复习",
   "url": "https://yumi1.top/computer-network-exam/",
-  "image": "https://img.paulzzh.com/touhou/random?5098",
+  "image": "https://img.paulzzh.com/touhou/random",
   "datePublished": "2024-05-20T10:43:54.000Z",
   "dateModified": "2025-05-07T15:11:14.559Z",
   "author": [
     {
       "@type": "Person",
       "name": "Yichen",
-      "url": "https://yumi1.top/"
+      "url": "https://yumi1.top"
     }
   ]
-}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/computer-network-exam/index.html"><link rel="preconnect" href="//unpkg.com"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/computer-network-exam/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
     (() => {
       
     const saveToLocal = {
@@ -73,7 +73,7 @@
         document.head.appendChild(link)
       }),
       addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
+        if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
         globalFn[key] = globalFn[key] || {}
         globalFn[key][name || Object.keys(globalFn[key]).length] = fn
@@ -100,10 +100,7 @@
 
       const theme = saveToLocal.get('theme')
     
-          const hour = new Date().getHours()
-          const isNight = hour <= 8 || hour >= 22
-          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
-          else theme === 'light' ? activateLightMode() : activateDarkMode()
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
       
       const asideStatus = saveToLocal.get('aside-status')
@@ -147,11 +144,11 @@
   lightbox: 'null',
   Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
   infinitegrid: {
-    js: 'https://unpkg.com/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
-  islazyloadPlugin: false,
+  islazyloadPlugin: true,
   isAnchor: false,
   percent: {
     toc: true,
@@ -164,7 +161,7 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://img.paulzzh.com/touhou/random?5098);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">计网期末复习</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计网期末复习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-20T10:43:54.000Z" title="发表于 2024-05-20 18:43:54">2024-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-07T15:11:14.559Z" title="更新于 2025-05-07 23:11:14">2025-05-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、选择题-共20题-每题2分-共40分">一、选择题(共20题, 每题2分, 共40分)</h2>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://img.paulzzh.com/touhou/random);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">计网期末复习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计网期末复习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-20T10:43:54.000Z" title="发表于 2024-05-20 18:43:54">2024-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-07T15:11:14.559Z" title="更新于 2025-05-07 23:11:14">2025-05-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、选择题-共20题-每题2分-共40分">一、选择题(共20题, 每题2分, 共40分)</h2>
 <ol>
 <li>通常所说的“三网”不包括(<span class="hide-inline"><button type="button" class="hide-button" style="background-color: #FF7242;color: #fff">查看答案</button><span class="hide-content">B</span></span>)<br>
 A 电信网络 B 物联网 C.电视网络 D.计算机网络</li>
@@ -228,7 +225,7 @@ A.端对端时延 B.数据帧的发送时间的两倍 C.两倍的端对端时延
 </ol>
 <details class="folding-tag" green><summary> 查看9题解析 </summary>
               <div class='content'>
-              <p>CSMA/CD 重要特性<br>使用CSMA/CD协议的以太网不能进行全双工通信而只能进行双向交替通信（半双工通信）。每个站在发送数据之后的一小段时间内，存在着遭遇碰撞的可能性。这种发送的不确定性使整个以太网的平均通信量远小于以太网的最高数据率。<br>最先发送数据帧的站，在发送数据帧后至多经过时间2t（两倍的端到端往返时延）就可知道发送的数据帧是否遭受了碰撞。 以太网的端到端往返时延2t称为争用期，或碰撞窗口。 经过争用期这段时间还没有检测到碰撞，才能肯定这次发送不会发生碰撞。</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/computer-network-exam/2024-05-20-20-24-29.png"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/computer-network-exam/2024-05-20-20-24-23.png"/></div></div>
+              <p>CSMA/CD 重要特性<br>使用CSMA/CD协议的以太网不能进行全双工通信而只能进行双向交替通信（半双工通信）。每个站在发送数据之后的一小段时间内，存在着遭遇碰撞的可能性。这种发送的不确定性使整个以太网的平均通信量远小于以太网的最高数据率。<br>最先发送数据帧的站，在发送数据帧后至多经过时间2t（两倍的端到端往返时延）就可知道发送的数据帧是否遭受了碰撞。 以太网的端到端往返时延2t称为争用期，或碰撞窗口。 经过争用期这段时间还没有检测到碰撞，才能肯定这次发送不会发生碰撞。</p><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/computer-network-exam/2024-05-20-20-24-29.png"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/computer-network-exam/2024-05-20-20-24-23.png"/></div></div>
               </div>
             </details>
 <ol start="10">
@@ -387,7 +384,7 @@ C.(-1+1-1+1+1+1-1-1) D.(+1+1-1-1-1-1+1-1) 现收到这样的码片序列:<br>
 <p>3.设要传输的信息M=101110, 采用的CRC多项式为P(x)=x<sup>4</sup>+x³+1,试求出冗余码和要传输的信息。(6分 注意：要有大致的解题思路，真接给出结果不给分)</p>
 <details class="folding-tag" green><summary> 查看解析 </summary>
               <div class='content'>
-              <p>CRC<br>将信息M后附加与多项式P的阶数相同的零位。P的阶数为4（最高次幂是4），所以在信息后附加4个零： 即101110<font color='orange'>0000</font><br>P(x): x<sup>4</sup>+x³+1即为11001</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/computer-network-exam/2024-05-21-03-04-48.png"/></div></div>CRC=原数+余数 = <b>101110</b>0110冗余码是0110，要传输的信息是1011100110。
+              <p>CRC<br>将信息M后附加与多项式P的阶数相同的零位。P的阶数为4（最高次幂是4），所以在信息后附加4个零： 即101110<font color='orange'>0000</font><br>P(x): x<sup>4</sup>+x³+1即为11001</p><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/computer-network-exam/2024-05-21-03-04-48.png"/></div></div>CRC=原数+余数 = <b>101110</b>0110冗余码是0110，要传输的信息是1011100110。
               </div>
             </details>
 <p>4.一个PPP帧的数据部分(以十六进制给出) 是7D 5E 46 FE 7D 27 7D 5D 7D 5D 65 7D 5E,试问真正的数据是什么? (5分)</p>
@@ -545,56 +542,7 @@ C.(-1+1-1+1+1+1-1-1) D.(+1+1-1-1-1-1+1-1) 现收到这样的码片序列:<br>
               <ul><li><ol><li>1-6轮：cwnd从1增长到32，每轮翻倍（指数增长），说明这是慢开始阶段<br>7-16轮：cwnd从33增长到42，每轮增加1（线性增长），说明已进入拥塞避免阶段<br>从慢开始转入拥塞避免的临界点是cwnd=32，此时慢开始阶段结束。根据TCP拥塞控制算法，当cwnd值达到慢开始门限值(ssthresh)时，就会从慢开始阶段转入拥塞避免阶段。</li></ol></li><li><ol start="2"><li>当cwnd = 42时网络产生了第一次拥塞。<br>观察表格可知：第16轮时cwnd = 42，但到第17轮时突然降为21（减半），这表明在cwnd = 42时网络发生了拥塞，触发了拥塞避免机制。</li></ol></li><li><ol start="3"><li>第23轮发生了超时重传，cwnd重置为1<br>之后进入慢开始阶段，cwnd呈现指数增长：1→2→4→8<br>第26轮cwnd为8，按照慢开始阶段的指数增长规律，第27轮应为16</li></ol></li></ul><ol><li>32</li><li>42</li><li>16</li></ol>
               </div>
             </details>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/computer-network-exam/">https://yumi1.top/computer-network-exam/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%80%83%E8%AF%95/">考试</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post-share"><div class="social-share" data-image="https://img.paulzzh.com/touhou/random?5098" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98-%E5%85%B120%E9%A2%98-%E6%AF%8F%E9%A2%982%E5%88%86-%E5%85%B140%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">一、选择题(共20题, 每题2分, 共40分)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98-%E5%85%B110%E7%A9%BA-%E6%AF%8F%E7%A9%BA1%E5%88%86-%E8%AE%A110%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text">二、填空题(共10空, 每空1分, 计10分)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E9%A2%98-%E5%85%B18%E9%A2%98-%E8%AE%A150%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">三、计算题 (共8题,计50分)</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/instant.page/instantpage.js" type="module"></script><script src="https://unpkg.com/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
-  const runMermaid = ele => {
-    window.loadMermaid = true
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
-
-    ele.forEach((item, index) => {
-      const mermaidSrc = item.firstElementChild
-      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
-      const mermaidID = `mermaid-${index}`
-      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
-
-      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
-      const renderMermaid = svg => {
-        mermaidSrc.insertAdjacentHTML('afterend', svg)
-      }
-
-      // mermaid v9 and v10 compatibility
-      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
-    })
-  }
-
-  const codeToMermaid = () => {
-    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
-    if (codeMermaidEle.length === 0) return
-
-    codeMermaidEle.forEach(ele => {
-      const preEle = document.createElement('pre')
-      preEle.className = 'mermaid-src'
-      preEle.hidden = true
-      preEle.textContent = ele.textContent
-      const newEle = document.createElement('div')
-      newEle.className = 'mermaid-wrap'
-      newEle.appendChild(preEle)
-      ele.parentNode.replaceWith(newEle)
-    })
-  }
-
-  const loadMermaid = () => {
-    if (false) codeToMermaid()
-    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
-    if ($mermaid.length === 0) return
-
-    const runMermaidFn = () => runMermaid($mermaid)
-    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
-    window.loadMermaid ? runMermaidFn() : btf.getScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(runMermaidFn)
-  }
-
-  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
-  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
-})()</script><script>(() => {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/computer-network-exam/">https://yumi1.top/computer-network-exam/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%80%83%E8%AF%95/">考试</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post-share"><div class="social-share" data-image="https://img.paulzzh.com/touhou/random" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/school-chaoxing-class-2/" title="大学网课自动播放-2.学习通作业自动答题 | 智慧树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" onerror="onerror=null;src='https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">大学网课自动播放-2.学习通作业自动答题 | 智慧树</div></div><div class="info-2"><div class="info-item-1">摆脱学校布置的无用网课 释放垃圾时间,自动刷课,自动答题,网课助手,油猴,篡改猴,网课答题,网课刷课,网课自动答题,网课自动刷课,网课自动播放,网课自动播放器,网课自动播放脚本,网课自动播放插件,网课自动播放器插件,网课自动播放脚本插件,网课自动播放器脚本,网课自动播放器脚本插件</div></div></div></a><a class="pagination-related" href="/hexo/" title="如何免费搭建一个hexo博客"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" onerror="onerror=null;src='https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">如何免费搭建一个hexo博客</div></div><div class="info-2"><div class="info-item-1">这篇写的比较匆忙,改天重写  视频教程:https://meeting.tencent.com/crw/lRMMGrDNf6 如何自己搭建一个免费的静态网站如https://webmastery.top/  或hexo博客 如本站  一、静态网页 1.1 注册github账户 github.com  打不开下载 下载链接 进行加速 github  1.2 创建github仓库 1.2.1复刻他人项目  这里使用https://github.com/fangkuai767/EatKun 1.2.2自建仓库上传   视频中使用源码https://yumi1.lanzn.com/i3Ylh1z3m77g 2.1 netlify部署 https://www.netlify.com/   选择刚刚上传/复刻的仓库 部署即可 3.netlify绑定域名  复制所给域名  选 CNAME,填入刚刚那个域名 二、hexo博客 1.前置下载 nodejs: https://nodejs.org/   网站打不开可以蓝奏云下载密码:i8ug 密码:i8ug git: https://git-scm....</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98-%E5%85%B120%E9%A2%98-%E6%AF%8F%E9%A2%982%E5%88%86-%E5%85%B140%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">一、选择题(共20题, 每题2分, 共40分)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98-%E5%85%B110%E7%A9%BA-%E6%AF%8F%E7%A9%BA1%E5%88%86-%E8%AE%A110%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text">二、填空题(共10空, 每空1分, 计10分)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E9%A2%98-%E5%85%B18%E9%A2%98-%E8%AE%A150%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">三、计算题 (共8题,计50分)</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2025 By Yichen</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
   const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
   const option = null
 
@@ -637,7 +585,7 @@ C.(-1+1-1+1+1+1-1-1) D.(+1+1-1-1-1-1+1-1) 现收到这样的码片序列:<br>
 
   const loadTwikoo = (el, path) => {
     if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
-    else btf.getScript('https://unpkg.com/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+    else btf.getScript('https://cdn1.tianli0.top/npm/js-heo@1.0.3/twikoo/twikoo.all.min.js').then(() => init(el, path))
   }
 
   if (isShuoshuo) {
@@ -647,8 +595,8 @@ C.(-1+1-1+1+1+1-1-1) D.(+1+1-1-1-1-1+1-1) 现收到这样的码片序列:<br>
     return
   }
 
-  if ('Twikoo' === 'Twikoo' || !true) {
-    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
     else loadTwikoo()
   } else {
     window.loadOtherComment = loadTwikoo
@@ -690,10 +638,59 @@ C.(-1+1-1+1+1+1-1-1) D.(+1+1-1-1-1-1+1-1) 现收到这样的码片序列:<br>
     return
   }
 
-  if ('Twikoo' === 'Livere' || !true) {
-    if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  if ('Twikoo' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
     else loadLivere()
   } else {
     window.loadOtherComment = loadLivere
   }
-})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://unpkg.com/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})()</script></div><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/eatpl/"]):not([href="/baidu_verify_codeva-AgFJfZw3E4.html"]):not([href="/robots.txt"]):not([href="/ydk/"]):not([href="/1e2fe79c78614eccb05c33ce7a156919.txt"]):not([href="/gnustrymooc.md"]):not([href="/stu_ityxb.md"]):not([href="/tencent8433070572161675678.txt"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

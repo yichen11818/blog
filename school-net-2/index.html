@@ -10,8 +10,8 @@
 <meta property="article:modified_time" content="2024-05-30T21:42:25.774Z">
 <meta property="article:author" content="Yichen">
 <meta property="article:tag" content="school">
-<meta property="article:tag" content="pppoe">
 <meta property="article:tag" content="WiFi">
+<meta property="article:tag" content="pppoe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yumi1.top/image/school-net-2/2024-04-26-15-01-01.png"><script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -25,10 +25,10 @@
     {
       "@type": "Person",
       "name": "Yichen",
-      "url": "https://yumi1.top/"
+      "url": "https://yumi1.top"
     }
   ]
-}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/school-net-2/index.html"><link rel="preconnect" href="//unpkg.com"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/school-net-2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
     (() => {
       
     const saveToLocal = {
@@ -74,7 +74,7 @@
         document.head.appendChild(link)
       }),
       addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
+        if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
         globalFn[key] = globalFn[key] || {}
         globalFn[key][name || Object.keys(globalFn[key]).length] = fn
@@ -101,10 +101,7 @@
 
       const theme = saveToLocal.get('theme')
     
-          const hour = new Date().getHours()
-          const isNight = hour <= 8 || hour >= 22
-          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
-          else theme === 'light' ? activateLightMode() : activateDarkMode()
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
       
       const asideStatus = saveToLocal.get('aside-status')
@@ -148,11 +145,11 @@
   lightbox: 'null',
   Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
   infinitegrid: {
-    js: 'https://unpkg.com/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
-  islazyloadPlugin: false,
+  islazyloadPlugin: true,
   isAnchor: false,
   percent: {
     toc: true,
@@ -165,12 +162,12 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/image/school-net-2/2024-04-26-15-01-01.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">校园网进行路由器拨号 WiFi</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">校园网进行路由器拨号 WiFi</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-26T05:14:11.000Z" title="发表于 2024-04-26 13:14:11">2024-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-30T21:42:25.774Z" title="更新于 2024-05-31 05:42:25">2024-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/">大学小技巧</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="site-card-group"><a class="site-card" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.yumi1.top/school-net"><div class="img"><img src="/image/bbh%20(2).webp"/></div><div class="info"><img src="/image/yumi.png"/><span class="title">校园网开机自动拨号+断线重连</span><span class="desc">yumi</span></div></a></div>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/image/school-net-2/2024-04-26-15-01-01.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">校园网进行路由器拨号 WiFi</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">校园网进行路由器拨号 WiFi</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-26T05:14:11.000Z" title="发表于 2024-04-26 13:14:11">2024-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-30T21:42:25.774Z" title="更新于 2024-05-31 05:42:25">2024-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/">大学小技巧</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="site-card-group"><a class="site-card" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.yumi1.top/school-net"><div class="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/bbh%20(2).webp"/></div><div class="info"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/yumi.png"/><span class="title">校园网开机自动拨号+断线重连</span><span class="desc">yumi</span></div></a></div>
 <p>继承上篇,本文可减少甚至解决拨号断网问题</p>
 <h1>1.设备</h1>
 <p><strong>小米4a千兆版</strong><br>
 咸鱼55元可入手,有能力可刷openwrt,后续会更新教程(挖坑)</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-04-48-33.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-04-48-33.png"/></div></div>
 <h1>2.配置路由器</h1>
 <h2 id="2-1连接路由器">2.1连接路由器</h2>
 <h3 id="2-1-1-电脑有线连接-推荐">2.1.1 电脑有线连接(推荐)</h3>
@@ -185,7 +182,7 @@
 <li>如果学校只在墙上提供一个网线插口,需要使用一根网线连接到路由器WAN口,再使用网线连接到这个插口</li>
 </ol>
 <p>路由器中一般第一个口为wan口,下面会标,建议连第一口</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-04-45-30.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-04-45-30.png"/></div></div>
 <h3 id="2-1-3-电脑，手机无线连接">2.1.3 电脑，手机无线连接</h3>
 <p><strong>建议有线连接设置好WiFI名与密码后进行</strong><br>
 连接路由器wifi 可在路由器背后找到wifi名称和密码,如没有 可以找到重置按钮,开机时拿针插入重置按钮,等待指示灯变化,即可重置密码</p>
@@ -195,14 +192,14 @@
 <li>如未找到可试试以下方法<br>
 <i class="fa-brands fa-windows"></i> + <kbd>R</kbd> 输入<code>cmd</code>回车</li>
 </ol>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-14-55-56.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/school-net-2/2024-04-26-14-55-56.png"/></div></div>
 <p>输入<code>ipconfig</code>查看本机ip地址与网关地址</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-14-56-29.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/school-net-2/2024-04-26-14-56-29.png"/></div></div>
 <p>复制网关地址 一般以192.168开头.1结尾<br>
 我这里是<code>192.168.31.1</code></p>
 <h2 id="2-3登录">2.3登录</h2>
 <p>浏览器打开网关地址</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-15-01-01.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/school-net-2/2024-04-26-15-01-01.png"/></div></div>
 <p>密码:</p>
 <ol>
 <li>一般密码在路由器背面,如果没写可以试试直接进,第一次配置会提示设置密码</li>
@@ -235,13 +232,13 @@
 </tr>
 </tbody>
 </table>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-15-20-56.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/school-net-2/2024-04-26-15-20-56.png"/></div></div>
 <h3 id="2-4-2-拨号上网">2.4.2 拨号上网</h3>
 <p>我校登录抓包可得上网方式为 <strong>PPPoe拨号</strong><br>
 宽带账号: 学号+后缀<br>
 联通的后缀为<code>@unicom</code>移动的后缀为<code>@cmcc</code>电信的后缀为<code>@telecom</code><br>
 宽带密码: 身份证后六位</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-26-15-47-33.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-26-15-47-33.png"/></div></div>
 <div class="tip bell"><p><font size=3 color=red>上网设置下面可设置WAN口速率 设置为1000M</font></p>
 </div>
 <p>至此你已经成功拨号上网了<br>
@@ -250,74 +247,25 @@
 <h3 id="2-5-1-DHCP">2.5.1 DHCP</h3>
 <p>DHCP是一种自动分配IP地址的协议,一般路由器默认开启 并2880分钟更改一次ip<br>
 若关闭DHCP 需要手动设置设备IP地址</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-03-59.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-03-59.png"/></div></div>
 <p>如有访问设备需求 建议将常用设备mac与ip绑定(看见我onecloud了不，挖坑下次写)</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-04-05.png" alt="即可使用ip在局域网内访问固定设备"/></div><span class="image-caption">即可使用ip在局域网内访问固定设备</span></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-04-05.png" alt="即可使用ip在局域网内访问固定设备"/></div><span class="image-caption">即可使用ip在局域网内访问固定设备</span></div>
 <h3 id="2-5-2-DMZ">2.5.2 DMZ</h3>
 <p>将设备端口以一对一的形式穿透，并将其ip暴露外网，我校为公网IP，开启DMZ后可直接访问设备（不推荐）</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-31-26.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-31-26.png"/></div></div>
 <h3 id="2-5-3-端口转发">2.5.3 端口转发</h3>
 <p>可将局域网的任意设备按任意规则转发到外网，例如将<code>192.168.31.2</code>的<code>10001</code>端口<code>TCP</code>,<code>UDP</code>转发到<code>80</code></p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-34-57.png"/></div></div>
-<p>此时获取本机公网ip<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-37-23.png"/></div></div><br>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-34-57.png"/></div></div>
+<p>此时获取本机公网ip<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-37-23.png"/></div></div><br>
 浏览器可通过 <code>18.163.117.80:80</code> 访问网站 (仅为示例,实际上ip应该在赣州 :)<br>
 此方案方便 安全 可按需转发 并支持多设备穿透外网</p>
 <h3 id="2-5-4-UPnP">2.5.4 UPnP</h3>
 <p>UPnP摆脱端口限制 可以直接穿透路由器进行访问 qbittorrent等软件需要使用其进行bt种子的p2p分享与下载<br>
 建议管理好UPnP设备,关闭不需要的设备,bilibili等直播软件与某些华为设备会自动开启UPnP占用你的网速</p>
-<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-43-42.png"/></div></div>
+<div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/../image/school-net-2/2024-04-27-05-43-42.png"/></div></div>
 <p>注意按时清理或直接关闭此功能</p>
 <p>下次更 刷老毛子openwrt教程</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/school-net-2/">https://yumi1.top/school-net-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/school/">school</a><a class="post-meta__tags" href="/tags/pppoe/">pppoe</a><a class="post-meta__tags" href="/tags/WiFi/">WiFi</a></div><div class="post-share"><div class="social-share" data-image="/image/school-net-2/2024-04-26-15-01-01.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/school-net/" title="校园网开机自动拨号+断线重连 Drcom(p)"><img class="cover" src="https://img.paulzzh.com/touhou/random?1963" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="info-item-2">校园网开机自动拨号+断线重连 Drcom(p)</div></div><div class="info-2"><div class="info-item-1">本方案可代替江西理工大学/赣南科技学院/江西理工大学应用科技学院 Drcom(p)校园网拨号软件,实现开机自动拨号,断线秒连,校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</div></div></div></a><a class="pagination-related" href="/school-campus-running/" title="步道乐跑破解校园跑 fake location GG修改器"><img class="cover" src="https://img.paulzzh.com/touhou/random?9602" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-12</div><div class="info-item-2">步道乐跑破解校园跑 fake location GG修改器</div></div><div class="info-2"><div class="info-item-1">本文以步道乐跑为例,众所周知步道乐跑的跑步数据是通过手机定位获取的,因此可以通过模拟定位来完成跑步,但是对于部分需要步数与GPS定位检测的校园跑应用来说可能不适用</div></div></div></a><a class="pagination-related" href="/school-chaoxing-class-2/" title="大学网课自动播放-2.学习通作业自动答题 | 智慧树"><img class="cover" src="https://img.paulzzh.com/touhou/random?1733" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-28</div><div class="info-item-2">大学网课自动播放-2.学习通作业自动答题 | 智慧树</div></div><div class="info-2"><div class="info-item-1">摆脱学校布置的无用网课 释放垃圾时间,自动刷课,自动答题,网课助手,油猴,篡改猴,网课答题,网课刷课,网课自动答题,网课自动刷课,网课自动播放,网课自动播放器,网课自动播放脚本,网课自动播放插件,网课自动播放器插件,网课自动播放脚本插件,网课自动播放器脚本,网课自动播放器脚本插件</div></div></div></a><a class="pagination-related" href="/school-chaoxing-class/" title="大学网课自动播放 1.学习通  OCS"><img class="cover" src="https://img.paulzzh.com/touhou/random?2349" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-16</div><div class="info-item-2">大学网课自动播放 1.学习通  OCS</div></div><div class="info-2"><div class="info-item-1">摆脱学校布置的无用网课 释放垃圾时间,自动刷课,自动答题,网课助手,油猴,篡改猴,网课答题,网课刷课,网课自动答题,网课自动刷课,网课自动播放,网课自动播放器,网课自动播放脚本,网课自动播放插件,网课自动播放器插件,网课自动播放脚本插件,网课自动播放器脚本,网课自动播放器脚本插件</div></div></div></a><a class="pagination-related" href="/school-video/" title="猴博士全套在线观看 大学期末抱佛脚"><img class="cover" src="https://img.paulzzh.com/touhou/random?8275" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-28</div><div class="info-item-2">猴博士全套在线观看 大学期末抱佛脚</div></div><div class="info-2"><div class="info-item-1">本文为大学生提供一些学习技巧,包括挂科抱佛脚,猴博士等,帮助大学生更好的学习</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.配置路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">2.1连接路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E7%94%B5%E8%84%91%E6%9C%89%E7%BA%BF%E8%BF%9E%E6%8E%A5-%E6%8E%A8%E8%8D%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 电脑有线连接(推荐)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-WAN%E5%8F%A3%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 WAN口连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E7%94%B5%E8%84%91%EF%BC%8C%E6%89%8B%E6%9C%BA%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3 电脑，手机无线连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E5%AF%BB%E6%89%BE%E7%BD%91%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">2.2寻找网关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E7%99%BB%E5%BD%95"><span class="toc-number">2.3.</span> <span class="toc-text">2.3登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4%E6%99%AE%E9%80%9A%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.4.</span> <span class="toc-text">2.4普通设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-wifi%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.4.1 wifi设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-%E6%8B%A8%E5%8F%B7%E4%B8%8A%E7%BD%91"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.4.2 拨号上网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text">2.5其他设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-DHCP"><span class="toc-number">2.5.1.</span> <span class="toc-text">2.5.1 DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-DMZ"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.5.2 DMZ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-3-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-number">2.5.3.</span> <span class="toc-text">2.5.3 端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-4-UPnP"><span class="toc-number">2.5.4.</span> <span class="toc-text">2.5.4 UPnP</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/instant.page/instantpage.js" type="module"></script><script src="https://unpkg.com/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
-  const runMermaid = ele => {
-    window.loadMermaid = true
-    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
-
-    ele.forEach((item, index) => {
-      const mermaidSrc = item.firstElementChild
-      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
-      const mermaidID = `mermaid-${index}`
-      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
-
-      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
-      const renderMermaid = svg => {
-        mermaidSrc.insertAdjacentHTML('afterend', svg)
-      }
-
-      // mermaid v9 and v10 compatibility
-      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
-    })
-  }
-
-  const codeToMermaid = () => {
-    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
-    if (codeMermaidEle.length === 0) return
-
-    codeMermaidEle.forEach(ele => {
-      const preEle = document.createElement('pre')
-      preEle.className = 'mermaid-src'
-      preEle.hidden = true
-      preEle.textContent = ele.textContent
-      const newEle = document.createElement('div')
-      newEle.className = 'mermaid-wrap'
-      newEle.appendChild(preEle)
-      ele.parentNode.replaceWith(newEle)
-    })
-  }
-
-  const loadMermaid = () => {
-    if (false) codeToMermaid()
-    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
-    if ($mermaid.length === 0) return
-
-    const runMermaidFn = () => runMermaid($mermaid)
-    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
-    window.loadMermaid ? runMermaidFn() : btf.getScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(runMermaidFn)
-  }
-
-  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
-  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
-})()</script><script>(() => {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/school-net-2/">https://yumi1.top/school-net-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/school/">school</a><a class="post-meta__tags" href="/tags/WiFi/">WiFi</a><a class="post-meta__tags" href="/tags/pppoe/">pppoe</a></div><div class="post-share"><div class="social-share" data-image="/image/school-net-2/2024-04-26-15-01-01.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/hexo/" title="如何免费搭建一个hexo博客"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" onerror="onerror=null;src='https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">如何免费搭建一个hexo博客</div></div><div class="info-2"><div class="info-item-1">这篇写的比较匆忙,改天重写  视频教程:https://meeting.tencent.com/crw/lRMMGrDNf6 如何自己搭建一个免费的静态网站如https://webmastery.top/  或hexo博客 如本站  一、静态网页 1.1 注册github账户 github.com  打不开下载 下载链接 进行加速 github  1.2 创建github仓库 1.2.1复刻他人项目  这里使用https://github.com/fangkuai767/EatKun 1.2.2自建仓库上传   视频中使用源码https://yumi1.lanzn.com/i3Ylh1z3m77g 2.1 netlify部署 https://www.netlify.com/   选择刚刚上传/复刻的仓库 部署即可 3.netlify绑定域名  复制所给域名  选 CNAME,填入刚刚那个域名 二、hexo博客 1.前置下载 nodejs: https://nodejs.org/   网站打不开可以蓝奏云下载密码:i8ug 密码:i8ug git: https://git-scm....</div></div></div></a><a class="pagination-related" href="/baidunetdisk/" title="百度网盘破限速实现70MB/s下载速度 破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/image/db9d14e4eb73f962c4e911d49c50293a.png" onerror="onerror=null;src='https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">百度网盘破限速实现70MB/s下载速度 破解</div></div><div class="info-2"><div class="info-item-1">相关文章: https://xuebiw.cn/archives/Pandownload  用idm搭配油猴插件的方法速度慢且不稳定, ce加速搭配百度网盘旧版本速度快但是同样不稳定,现在介绍一种稳定且速度快的方法  1.安装百度网盘客户端 百度网盘https://pan.baidu.com/download#win 安装完成后打开百度网盘客户端,登录你的百度账号 2.开启闲置带宽共享  右上角打开设置     传输    优化速率 - &gt; 开启此功能    授权   3.即可发现自己下载速度可以将近跑满宽带  博主校园网宽带有1000兆,下载速度能跑到将近560兆,实际下载速度在70MB/s左右 4.注意! 用此方法时你将同意百度网盘使用你的闲置宽带,即将你电脑作为p2p下载器,在平时会占用你的宽带!!所以请在下载完所需东西后将闲置带宽共享功能关闭!!!  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/school-net/" title="校园网开机自动拨号+断线重连 Drcom(p)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="info-item-2">校园网开机自动拨号+断线重连 Drcom(p)</div></div><div class="info-2"><div class="info-item-1">本方案可代替江西理工大学/赣南科技学院/江西理工大学应用科技学院 Drcom(p)校园网拨号软件,实现开机自动拨号,断线秒连,校园网总断? 连不上? 连接每次都要连好久? 想要秒连校园网? 想要断线自动重连? 请看这里</div></div></div></a><a class="pagination-related" href="/school-campus-running/" title="步道乐跑破解校园跑 fake location GG修改器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-12</div><div class="info-item-2">步道乐跑破解校园跑 fake location GG修改器</div></div><div class="info-2"><div class="info-item-1">本文以步道乐跑为例,众所周知步道乐跑的跑步数据是通过手机定位获取的,因此可以通过模拟定位来完成跑步,但是对于部分需要步数与GPS定位检测的校园跑应用来说可能不适用</div></div></div></a><a class="pagination-related" href="/school-chaoxing-class-2/" title="大学网课自动播放-2.学习通作业自动答题 | 智慧树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-28</div><div class="info-item-2">大学网课自动播放-2.学习通作业自动答题 | 智慧树</div></div><div class="info-2"><div class="info-item-1">摆脱学校布置的无用网课 释放垃圾时间,自动刷课,自动答题,网课助手,油猴,篡改猴,网课答题,网课刷课,网课自动答题,网课自动刷课,网课自动播放,网课自动播放器,网课自动播放脚本,网课自动播放插件,网课自动播放器插件,网课自动播放脚本插件,网课自动播放器脚本,网课自动播放器脚本插件</div></div></div></a><a class="pagination-related" href="/school-video/" title="猴博士全套在线观看 大学期末抱佛脚"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-28</div><div class="info-item-2">猴博士全套在线观看 大学期末抱佛脚</div></div><div class="info-2"><div class="info-item-1">本文为大学生提供一些学习技巧,包括挂科抱佛脚,猴博士等,帮助大学生更好的学习</div></div></div></a><a class="pagination-related" href="/school-chaoxing-class/" title="大学网课自动播放 1.学习通  OCS"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.paulzzh.com/touhou/random" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-16</div><div class="info-item-2">大学网课自动播放 1.学习通  OCS</div></div><div class="info-2"><div class="info-item-1">摆脱学校布置的无用网课 释放垃圾时间,自动刷课,自动答题,网课助手,油猴,篡改猴,网课答题,网课刷课,网课自动答题,网课自动刷课,网课自动播放,网课自动播放器,网课自动播放脚本,网课自动播放插件,网课自动播放器插件,网课自动播放脚本插件,网课自动播放器脚本,网课自动播放器脚本插件</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.配置路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">2.1连接路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E7%94%B5%E8%84%91%E6%9C%89%E7%BA%BF%E8%BF%9E%E6%8E%A5-%E6%8E%A8%E8%8D%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 电脑有线连接(推荐)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-WAN%E5%8F%A3%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 WAN口连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E7%94%B5%E8%84%91%EF%BC%8C%E6%89%8B%E6%9C%BA%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3 电脑，手机无线连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E5%AF%BB%E6%89%BE%E7%BD%91%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">2.2寻找网关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E7%99%BB%E5%BD%95"><span class="toc-number">2.3.</span> <span class="toc-text">2.3登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4%E6%99%AE%E9%80%9A%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.4.</span> <span class="toc-text">2.4普通设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-wifi%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.4.1 wifi设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-%E6%8B%A8%E5%8F%B7%E4%B8%8A%E7%BD%91"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.4.2 拨号上网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text">2.5其他设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-DHCP"><span class="toc-number">2.5.1.</span> <span class="toc-text">2.5.1 DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-DMZ"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.5.2 DMZ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-3-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-number">2.5.3.</span> <span class="toc-text">2.5.3 端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-4-UPnP"><span class="toc-number">2.5.4.</span> <span class="toc-text">2.5.4 UPnP</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2025 By Yichen</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
   const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
   const option = null
 
@@ -360,7 +308,7 @@
 
   const loadTwikoo = (el, path) => {
     if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
-    else btf.getScript('https://unpkg.com/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+    else btf.getScript('https://cdn1.tianli0.top/npm/js-heo@1.0.3/twikoo/twikoo.all.min.js').then(() => init(el, path))
   }
 
   if (isShuoshuo) {
@@ -370,8 +318,8 @@
     return
   }
 
-  if ('Twikoo' === 'Twikoo' || !true) {
-    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
     else loadTwikoo()
   } else {
     window.loadOtherComment = loadTwikoo
@@ -413,10 +361,59 @@
     return
   }
 
-  if ('Twikoo' === 'Livere' || !true) {
-    if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  if ('Twikoo' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
     else loadLivere()
   } else {
     window.loadOtherComment = loadLivere
   }
-})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://unpkg.com/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})()</script></div><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/eatpl/"]):not([href="/baidu_verify_codeva-AgFJfZw3E4.html"]):not([href="/robots.txt"]):not([href="/ydk/"]):not([href="/1e2fe79c78614eccb05c33ce7a156919.txt"]):not([href="/gnustrymooc.md"]):not([href="/stu_ityxb.md"]):not([href="/tencent8433070572161675678.txt"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

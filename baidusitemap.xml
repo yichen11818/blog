@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://yumi1.top/explorerpatcher/</loc>
+    <lastmod>2025-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://yumi1.top/test-link/</loc>
+    <lastmod>2025-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://yumi1.top/baidunetdisk/</loc>
+    <lastmod>2025-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://yumi1.top/weread-security-analysis-1/</loc>
     <lastmod>2025-08-01</lastmod>
   </url>
@@ -39,10 +51,6 @@
   <url>
     <loc>https://yumi1.top/linux-proxy/</loc>
     <lastmod>2024-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yumi1.top/explorerpatcher/</loc>
-    <lastmod>2024-11-26</lastmod>
   </url>
   <url>
     <loc>https://yumi1.top/school-chaoxing-class/</loc>
@@ -101,10 +109,6 @@
     <lastmod>2024-05-30</lastmod>
   </url>
   <url>
-    <loc>https://yumi1.top/baidunetdisk/</loc>
-    <lastmod>2024-05-30</lastmod>
-  </url>
-  <url>
     <loc>https://yumi1.top/hexo/</loc>
     <lastmod>2024-05-30</lastmod>
   </url>
@@ -129,11 +133,11 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>https://yumi1.top/windows-optimize-3/</loc>
+    <loc>https://yumi1.top/windows-optimize-4/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>https://yumi1.top/windows-optimize-4/</loc>
+    <loc>https://yumi1.top/windows-optimize-3/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
 </urlset> 
