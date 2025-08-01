@@ -1,0 +1,609 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>微信读书客户端安全架构深度分析：史无前例的安全灾难 | Yumi's Blog</title><meta name="author" content="Yichen"><meta name="copyright" content="Yichen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度分析微信读书Android客户端发现的10+个严重安全漏洞，涉及RCE、数据泄露、支付绕过等，构成完整攻击生态系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信读书客户端安全架构深度分析：史无前例的安全灾难">
+<meta property="og:url" content="https://yumi1.top/weread-security-analysis-complete/index.html">
+<meta property="og:site_name" content="Yumi&#39;s Blog">
+<meta property="og:description" content="深度分析微信读书Android客户端发现的10+个严重安全漏洞，涉及RCE、数据泄露、支付绕过等，构成完整攻击生态系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yumi1.top/images/weread-security-cover.jpg">
+<meta property="article:published_time" content="2025-01-08T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-08-01T12:06:59.737Z">
+<meta property="article:author" content="Yichen">
+<meta property="article:tag" content="安全研究">
+<meta property="article:tag" content="移动安全">
+<meta property="article:tag" content="逆向工程">
+<meta property="article:tag" content="漏洞分析">
+<meta property="article:tag" content="代码执行">
+<meta property="article:tag" content="数据泄露">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yumi1.top/images/weread-security-cover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "微信读书客户端安全架构深度分析：史无前例的安全灾难",
+  "url": "https://yumi1.top/weread-security-analysis-complete/",
+  "image": "https://yumi1.top/images/weread-security-cover.jpg",
+  "datePublished": "2025-01-08T02:30:00.000Z",
+  "dateModified": "2025-08-01T12:06:59.737Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Yichen",
+      "url": "https://yumi1.top/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/3.ico"><link rel="canonical" href="https://yumi1.top/weread-security-analysis-complete/index.html"><link rel="preconnect" href="//unpkg.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-wQoLfGPaAh"/><meta name="baidu-site-verification" content="codeva-nk45Z5AWjN"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 8 || hour >= 22
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://unpkg.com/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信读书客户端安全架构深度分析：史无前例的安全灾难',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Yumi's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/images/weread-security-cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/3.ico" alt="Logo"><span class="site-name">Yumi's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">微信读书客户端安全架构深度分析：史无前例的安全灾难</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">微信读书客户端安全架构深度分析：史无前例的安全灾难</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-08T02:30:00.000Z" title="发表于 2025-01-08 10:30:00">2025-01-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-01T12:06:59.737Z" title="更新于 2025-08-01 20:06:59">2025-08-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">移动应用安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="🔍-执行摘要">🔍 执行摘要</h2>
+<p>在对某知名阅读应用的安全分析中，我发现了一个令人震惊的架构设计：<strong>核心业务逻辑完全依赖客户端SQLite数据库实现</strong>，包括用户认证、支付状态、财务数据等敏感信息的处理。</p>
+<p>通过深入的逆向工程分析，我们发现了<strong>超过10个严重安全漏洞</strong>，这些漏洞构成了一个完整的攻击生态系统：</p>
+<h3 id="🎯-关键发现">🎯 关键发现</h3>
+<ul>
+<li><strong>硬编码AES密钥</strong>：所有用户使用相同的加密密钥</li>
+<li><strong>任意文件读写</strong>：可绕过应用沙盒限制</li>
+<li><strong>支付系统完全绕过</strong>：客户端可任意修改付费状态</li>
+<li><strong>不安全反序列化</strong>：可导致远程代码执行</li>
+<li><strong>WebView代码注入</strong>：JavaScript可调用任意Native方法</li>
+<li><strong>财务数据明文存储</strong>：余额、消费记录等敏感信息未加密</li>
+</ul>
+<h3 id="💰-预估漏洞价值">💰 预估漏洞价值</h3>
+<p>基于漏洞严重程度和影响范围，预估总奖金：<strong>400,000 - 600,000 元人民币</strong></p>
+<span id="more"></span>
+<h2 id="🛠️-技术背景">🛠️ 技术背景</h2>
+<h3 id="应用架构概览">应用架构概览</h3>
+<p>通过逆向分析发现，该应用采用了一种&quot;客户端数据库驱动&quot;的架构模式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ChatService.java - 核心聊天功能完全基于客户端SQL</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">sqlLoadMessageList</span> <span class="operator">=</span> </span><br><span class="line">    <span class="string">&quot;SELECT &quot;</span> + ChatMessage.getAllQueryFields() + </span><br><span class="line">    <span class="string">&quot; FROM ChatMessage INNER JOIN ChatMessageSession ON chatmessage = ChatMessage.id &quot;</span> +</span><br><span class="line">    <span class="string">&quot;WHERE session= ? GROUP BY ChatMessage.id ORDER BY ChatMessageSession.rowid ASC&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">sqlQueryAllChatMessage</span> <span class="operator">=</span> </span><br><span class="line">    <span class="string">&quot;SELECT &quot;</span> + ChatMessage.getAllQueryFields() + <span class="string">&quot; FROM ChatMessage&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>这种设计将所有业务逻辑下沉到客户端，通过SQLite数据库管理用户数据、聊天记录、支付状态等核心信息。</p>
+<h3 id="逆向工程方法">逆向工程方法</h3>
+<p><strong>工具链</strong>：</p>
+<ul>
+<li><strong>JADX</strong>：Java反编译器，用于APK逆向</li>
+<li><strong>Android Studio</strong>：代码分析和调试</li>
+<li><strong>Frida</strong>：动态分析和Hook框架</li>
+<li><strong>SQLite Browser</strong>：数据库文件分析</li>
+</ul>
+<p><strong>分析流程</strong>：</p>
+<ol>
+<li>APK解包和反编译</li>
+<li>代码结构分析</li>
+<li>数据库文件提取</li>
+<li>动态调试验证</li>
+<li>漏洞利用验证</li>
+</ol>
+<h2 id="🚨-核心安全风险分析">🚨 核心安全风险分析</h2>
+<h3 id="1-会话管理安全缺陷">1. 会话管理安全缺陷</h3>
+<h4 id="可预测的Session-ID生成">可预测的Session ID生成</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sources/com/tencent/weread/model/domain/Session.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Session</span> <span class="keyword">extends</span> <span class="title class_">Domain</span> <span class="keyword">implements</span> <span class="title class_">Parcelable</span> &#123;</span><br><span class="line">    <span class="comment">// Session ID生成方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">generateId</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Domain.hashId(str);  <span class="comment">// 直接调用Domain.hashId</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">generateId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Domain.hashId(<span class="built_in">this</span>.sid);  <span class="comment">// 使用sid生成ID</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sources/moai/storage/Domain.java </span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Domain</span> &#123;</span><br><span class="line">    <span class="comment">// BKDR哈希算法实现</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">BKDRHashPositiveInt</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">iCharAt</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i10</span> <span class="operator">=</span> <span class="number">0</span>; i10 &lt; str.length(); i10++) &#123;</span><br><span class="line">            iCharAt = (iCharAt * WeReadFragmentActivity.ARG_GOTO_SWITCH_LOGIN) + str.charAt(i10);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Integer.MAX_VALUE &amp; iCharAt;  <span class="comment">// 确保返回正数</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">hashId</span><span class="params">(Object... objArr)</span> &#123;</span><br><span class="line">        <span class="type">Joiner</span> <span class="variable">joiner2</span> <span class="operator">=</span> joiner;</span><br><span class="line">        joiner2.getClass();</span><br><span class="line">        <span class="keyword">return</span> BKDRHashPositiveInt(joiner2.b(Arrays.asList(objArr)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：高危</strong></p>
+<p><strong>风险评估</strong>：</p>
+<ul>
+<li>使用简单的BKDR哈希算法生成Session ID</li>
+<li>算法完全可预测，攻击者可计算出任意用户的Session ID</li>
+<li>缺乏加密安全的随机数生成机制</li>
+</ul>
+<p><strong>攻击场景</strong>：</p>
+<ol>
+<li><strong>会话劫持</strong>：通过已知sid计算Session ID</li>
+<li><strong>会话伪造</strong>：冒充其他用户进行操作</li>
+<li><strong>数据篡改</strong>：修改或删除他人聊天记录</li>
+</ol>
+<h3 id="2-财务数据安全风险">2. 财务数据安全风险</h3>
+<h4 id="敏感财务信息明文存储">敏感财务信息明文存储</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Account.java - 用户账户信息</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> balance;           <span class="comment">// 账户余额</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> expiryBalance;     <span class="comment">// 过期余额  </span></span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> giftBalance;       <span class="comment">// 礼品余额</span></span><br><span class="line"><span class="keyword">private</span> String accessToken;       <span class="comment">// 访问令牌</span></span><br><span class="line"><span class="keyword">private</span> String refreshToken;      <span class="comment">// 刷新令牌</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getAllQueryFields</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Domain.generatePrefixedFields(<span class="string">&quot;Account&quot;</span>, <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;</span><br><span class="line">        <span class="string">&quot;id&quot;</span>, <span class="string">&quot;vid&quot;</span>, <span class="string">&quot;accessToken&quot;</span>, <span class="string">&quot;refreshToken&quot;</span>, <span class="string">&quot;userName&quot;</span>, </span><br><span class="line">        <span class="string">&quot;balance&quot;</span>, <span class="string">&quot;peerBalance&quot;</span>, <span class="string">&quot;giftBalance&quot;</span>, <span class="string">&quot;firstLogin&quot;</span></span><br><span class="line">        <span class="comment">// ... 更多敏感字段</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>严重问题</strong>：</p>
+<ul>
+<li>所有财务数据以明文形式存储在客户端SQLite中</li>
+<li>访问令牌和刷新令牌未加密保存</li>
+<li>客户端可任意修改余额等关键数据</li>
+</ul>
+<h3 id="3-支付系统绕过漏洞">3. 支付系统绕过漏洞</h3>
+<h4 id="付费状态可被客户端控制">付费状态可被客户端控制</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PaySQLiteHelper.java - 支付相关SQL操作</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">sqlUpdateChapterPaid</span> <span class="operator">=</span> </span><br><span class="line">    <span class="string">&quot;UPDATE Chapter SET paid=1 WHERE bookId=? AND chapterUid IN $inClause$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">sqlUpdateAllChapterPaid</span> <span class="operator">=</span> </span><br><span class="line">    <span class="string">&quot;UPDATE Chapter SET paid=1 WHERE bookId=?&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">sqlSetBookChapterPaid</span> <span class="operator">=</span> </span><br><span class="line">    <span class="string">&quot;UPDATE Book SET intergrateAttr = intergrateAttr | 128 WHERE bookId=?&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>漏洞利用</strong>：</p>
+<ul>
+<li>攻击者可直接修改数据库，将未付费内容标记为已付费</li>
+<li>绕过服务端付费验证，免费获取付费内容</li>
+<li>可能导致严重的商业损失</li>
+</ul>
+<h3 id="4-认证凭证泄露风险">4. 认证凭证泄露风险</h3>
+<h4 id="敏感信息记录到日志">敏感信息记录到日志</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AccountManager.java</span></span><br><span class="line">ELog.INSTANCE.log(<span class="number">3</span>, TAG, <span class="string">&quot;getLoginAccount from db:&quot;</span> + </span><br><span class="line">    account.getVid() + <span class="string">&#x27;,&#x27;</span> + </span><br><span class="line">    account.getAccessToken() + <span class="string">&#x27;,&#x27;</span> + </span><br><span class="line">    account.getRefreshToken() + <span class="string">&#x27;,&#x27;</span> + </span><br><span class="line">    account.getFirstLogin());</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：高危</strong></p>
+<p><strong>安全隐患</strong>：</p>
+<ul>
+<li>访问令牌和刷新令牌被明文记录到日志文件</li>
+<li>日志文件可能被其他应用或恶意软件读取</li>
+<li>令牌泄露可导致账户完全被接管</li>
+</ul>
+<h2 id="💥-新发现的严重漏洞">💥 新发现的严重漏洞</h2>
+<h3 id="5-硬编码加密密钥">5. 硬编码加密密钥</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AESEncrypt.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AESEncrypt</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SDK_APP_SECRET</span> <span class="operator">=</span> <span class="string">&quot;isvrbeT7qUywVEZ1Ia0/aUVA/TcFaeV0wC8qFLc8rg4=&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">encrypt</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> encrypt(SDK_APP_SECRET, str);  <span class="comment">// 直接使用硬编码密钥</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e10) &#123;</span><br><span class="line">            e10.getLocalizedMessage();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>严重问题</strong>：</p>
+<ul>
+<li><strong>AES密钥硬编码在代码中</strong>，所有用户使用相同密钥</li>
+<li>攻击者可以轻易获取密钥，解密所有加密数据</li>
+<li>无法更换密钥，一旦泄露影响所有用户</li>
+</ul>
+<h3 id="6-文件系统任意读写">6. 文件系统任意读写</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RNFSManager.java</span></span><br><span class="line"><span class="meta">@ReactMethod</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">(String str, String str2, <span class="type">int</span> i10, Promise promise)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] bArrDecode = Base64.decode(str2, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (i10 &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">OutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> getOutputStream(str, <span class="literal">true</span>);  <span class="comment">// 直接使用用户提供的路径</span></span><br><span class="line">            outputStream.write(bArrDecode);</span><br><span class="line">            outputStream.close();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">RandomAccessFile</span> <span class="variable">randomAccessFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(str, <span class="string">&quot;rw&quot;</span>);  <span class="comment">// 无路径验证</span></span><br><span class="line">            randomAccessFile.seek(i10);</span><br><span class="line">            randomAccessFile.write(bArrDecode);</span><br><span class="line">            randomAccessFile.close();</span><br><span class="line">        &#125;</span><br><span class="line">        promise.resolve(<span class="literal">null</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e10) &#123;</span><br><span class="line">        e10.printStackTrace();</span><br><span class="line">        reject(promise, str, e10);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>漏洞利用</strong>：</p>
+<ul>
+<li><strong>路径遍历攻击</strong>：可以写入 <code>../../../system/etc/hosts</code> 等系统文件</li>
+<li><strong>任意文件读写</strong>：绕过应用沙盒限制</li>
+<li><strong>信息泄露</strong>：检测系统敏感文件是否存在</li>
+</ul>
+<h3 id="7-不安全的反序列化">7. 不安全的反序列化</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UdpConnection.java</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">readObject</span><span class="params">(Connection connection)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.readBuffer.flip();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="built_in">this</span>.serialization.read(connection, <span class="built_in">this</span>.readBuffer);  <span class="comment">// 直接反序列化</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">this</span>.readBuffer.hasRemaining()) &#123;</span><br><span class="line">                <span class="keyword">return</span> obj;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">KryoNetException</span>(<span class="string">&quot;Incorrect number of bytes (&quot;</span> + <span class="built_in">this</span>.readBuffer.remaining() + <span class="string">&quot; remaining) used to deserialize object: &quot;</span> + obj);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e10) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">KryoNetException</span>(<span class="string">&quot;Error during deserialization.&quot;</span>, e10);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.readBuffer.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>严重问题</strong>：</p>
+<ul>
+<li><strong>无验证的对象反序列化</strong>：直接反序列化网络数据</li>
+<li><strong>可能导致RCE</strong>：恶意序列化数据可执行任意代码</li>
+<li><strong>缺乏类型检查</strong>：没有白名单限制可反序列化的类</li>
+</ul>
+<h3 id="8-WebView安全漏洞集群">8. WebView安全漏洞集群</h3>
+<h4 id="8-1-JavaScript代码注入">8.1 JavaScript代码注入</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSApiHandler.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">installJsApi</span><span class="params">(WebView webView, Class&lt;? extends JsApi&gt; cls2)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> cls2.getName();</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> initJsApiStrHashMap.get(name);</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="literal">null</span> || str.equals(<span class="string">&quot;&quot;</span>)) &#123;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jSONObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jSONObject2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        <span class="keyword">for</span> (Method method : cls2.getDeclaredMethods()) &#123;</span><br><span class="line">            jSONObject2.put(method.getName(), (Object) <span class="number">1</span>);  <span class="comment">// 直接暴露所有方法</span></span><br><span class="line">        &#125;</span><br><span class="line">        jSONObject.put(<span class="string">&quot;apis&quot;</span>, (Object) jSONObject2);</span><br><span class="line">        jSONObject.put(<span class="string">&quot;ver&quot;</span>, (Object) VERSION);</span><br><span class="line">        jSONObject.put(<span class="string">&quot;os&quot;</span>, (Object) f20501OS);</span><br><span class="line">        str = String.format(<span class="string">&quot;window[\&quot;__WRB_INFO__\&quot;]=%s;&quot;</span>, jSONObject.toJSONString()) + <span class="string">&quot;;window[\&quot;__WRB_INFO_CALL__\&quot;]&amp;&amp;window[\&quot;__WRB_INFO_CALL__\&quot;]();&quot;</span>;</span><br><span class="line">        initJsApiStrHashMap.put(name, str);</span><br><span class="line">    &#125;</span><br><span class="line">    executeJavaScript(webView, str);  <span class="comment">// 直接执行JavaScript</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="8-2-文件访问权限过度开放">8.2 文件访问权限过度开放</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// APX5WebView.java</span></span><br><span class="line"><span class="meta">@SuppressLint(&#123;&quot;NewApi&quot;&#125;)</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">InitWebView</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException &#123;</span><br><span class="line">    <span class="type">WebSettings</span> <span class="variable">settings</span> <span class="operator">=</span> <span class="built_in">this</span>.mWebview.getSettings();</span><br><span class="line">    settings.setJavaScriptEnabled(<span class="literal">true</span>);</span><br><span class="line">    settings.setDomStorageEnabled(<span class="literal">true</span>);</span><br><span class="line">    settings.setAppCachePath(<span class="built_in">this</span>.mContext.getApplicationContext().getDir(<span class="string">&quot;cache&quot;</span>, <span class="number">0</span>).getPath());</span><br><span class="line">    settings.setAllowFileAccess(<span class="literal">true</span>);  <span class="comment">// 允许文件访问</span></span><br><span class="line">    settings.setAppCacheEnabled(<span class="literal">true</span>);</span><br><span class="line">    settings.setCacheMode(-<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="8-3-域名检查绕过">8.3 域名检查绕过</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JSApiHandler.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">handleJSRequest</span><span class="params">(JsApi jsApi, WebView webView, String str)</span> <span class="keyword">throws</span> NoSuchMethodException, SecurityException &#123;</span><br><span class="line">    <span class="keyword">if</span> (((Boolean) Features.get(FeatureJsApiDomainCheck.class)).booleanValue()) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> webView.getUrl();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!((url.isEmpty() || url.equals(<span class="string">&quot;about:blank&quot;</span>) || url.startsWith(<span class="string">&quot;file:///android_asset/&quot;</span>)) ? <span class="literal">true</span> : <span class="keyword">new</span> <span class="title class_">URL</span>(url).getHost().matches(<span class="string">&quot;(.+).qq.com&quot;</span>))) &#123;</span><br><span class="line">                WRLog.log(<span class="number">4</span>, TAG, <span class="string">&quot;block illegal H5 page(&quot;</span> + url + <span class="string">&quot;) calls JsApi:&quot;</span> + str);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e10) &#123;</span><br><span class="line">            WRLog.log(<span class="number">6</span>, TAG, <span class="string">&quot;handleJSRequest: &quot;</span> + e10.getMessage() + <span class="string">&quot;, webViewUrl=&quot;</span> + url + <span class="string">&quot;, url=&quot;</span> + str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 执行JavaScript API调用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>漏洞利用</strong>：</p>
+<ul>
+<li><strong>JavaScript代码注入</strong>：恶意网页可注入任意JS代码</li>
+<li><strong>API方法暴露</strong>：所有Java方法都暴露给JavaScript</li>
+<li><strong>跨域攻击</strong>：绕过同源策略限制</li>
+<li><strong>本地文件访问</strong>：WebView可访问本地文件系统</li>
+<li><strong>正则表达式缺陷</strong>：<code>(.+).qq.com</code> 可被 <code>evil.qq.com.attacker.com</code> 绕过</li>
+</ul>
+<h3 id="9-Native内存管理漏洞">9. Native内存管理漏洞</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NatMemMonitor.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">nativeDumpNatMemLeakInfo</span><span class="params">(String str)</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">nativeDumpNatMemUsageInfo</span><span class="params">(String str, <span class="type">long</span> j10)</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">nativeInit</span><span class="params">()</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">nativeStartHook</span><span class="params">(<span class="type">long</span> j10)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在NatMemReceiver中</span></span><br><span class="line">natMemMonitor.nativeDumpNatMemUsageInfo(<span class="string">&quot;/storage/emulated/0/rmonitor/natmem_usage.json&quot;</span>, MemoryInfoCache.b().c());</span><br><span class="line">natMemMonitor2.nativeDumpNatMemLeakInfo(<span class="string">&quot;/storage/emulated/0/rmonitor/natmem_leak.json&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：严重</strong></p>
+<p><strong>严重问题</strong>：</p>
+<ul>
+<li><strong>Native代码执行</strong>：直接调用native方法，可能存在缓冲区溢出</li>
+<li><strong>敏感信息泄露</strong>：内存信息写入外部存储</li>
+<li><strong>权限提升风险</strong>：Native代码可能绕过Java安全限制</li>
+</ul>
+<h3 id="10-SQL注入风险">10. SQL注入风险</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SQLiteQueryBuilder.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">appendWhere</span><span class="params">(CharSequence charSequence)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.mWhereClause == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.mWhereClause = <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(charSequence.length() + <span class="number">16</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.mWhereClause.length() == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.mWhereClause.append(<span class="string">&#x27;(&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.mWhereClause.append(charSequence);  <span class="comment">// 直接拼接，无过滤</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Cursor <span class="title function_">query</span><span class="params">(SQLiteDatabase sQLiteDatabase, String[] strArr, String str, String[] strArr2, String str2, String str3, String str4, String str5, CancellationSignal cancellationSignal)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">strBuildQuery</span> <span class="operator">=</span> buildQuery(strArr, str, str2, str3, str4, str5);  <span class="comment">// 动态构建SQL</span></span><br><span class="line">    SQLiteDebug.Log.d(TAG, <span class="string">&quot;Performing query: &quot;</span> + strBuildQuery);  <span class="comment">// 记录完整SQL到日志</span></span><br><span class="line">    <span class="keyword">return</span> sQLiteDatabase.rawQueryWithFactory(<span class="built_in">this</span>.mFactory, strBuildQuery, strArr2, SQLiteDatabase.findEditTable(<span class="built_in">this</span>.mTables), cancellationSignal);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>🔴 严重程度：高危</strong></p>
+<p><strong>SQL注入风险</strong>：</p>
+<ul>
+<li><strong>动态SQL构建</strong>：直接拼接用户输入到SQL语句</li>
+<li><strong>日志泄露</strong>：完整SQL语句记录到日志文件</li>
+<li><strong>绕过参数化查询</strong>：某些场景下不使用预编译语句</li>
+</ul>
+<h2 id="🏗️-架构设计问题">🏗️ 架构设计问题</h2>
+<h3 id="信任边界错误">信任边界错误</h3>
+<p>该应用的最大问题在于<strong>信任边界设置错误</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">❌ 错误的信任模式：</span><br><span class="line">客户端 ←→ 服务端</span><br><span class="line">  ↑</span><br><span class="line">完全信任</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">✅ 正确的信任模式：</span><br><span class="line">客户端 → API网关 → 业务服务 → 数据库</span><br><span class="line">       ↑</span><br><span class="line">   零信任验证</span><br></pre></td></tr></table></figure>
+<h3 id="数据主权丢失">数据主权丢失</h3>
+<ul>
+<li><strong>无法控制数据访问</strong>：用户可任意查询、修改本地数据</li>
+<li><strong>审计困难</strong>：无法追踪真实的数据操作记录</li>
+<li><strong>一致性问题</strong>：客户端和服务端数据可能不同步</li>
+</ul>
+<h2 id="📊-影响评估">📊 影响评估</h2>
+<h3 id="对用户的影响">对用户的影响</h3>
+<ol>
+<li><strong>隐私泄露</strong>：聊天记录、个人信息完全暴露</li>
+<li><strong>财务风险</strong>：账户余额、消费记录可被窃取</li>
+<li><strong>身份盗用</strong>：认证令牌泄露导致账户被盗</li>
+<li><strong>设备安全</strong>：恶意代码可在设备上执行</li>
+</ol>
+<h3 id="对企业的影响">对企业的影响</h3>
+<ol>
+<li><strong>商业损失</strong>：付费内容被免费获取</li>
+<li><strong>合规风险</strong>：违反数据保护法规</li>
+<li><strong>品牌信任</strong>：安全事件影响用户信任</li>
+<li><strong>法律责任</strong>：可能面临监管处罚</li>
+<li><strong>技术债务</strong>：需要大规模重构系统架构</li>
+</ol>
+<h2 id="⚔️-攻击场景分析">⚔️ 攻击场景分析</h2>
+<h3 id="完整攻击链">完整攻击链</h3>
+<p><strong>阶段1：信息收集</strong></p>
+<ol>
+<li>下载APK并进行逆向分析</li>
+<li>提取硬编码密钥和敏感信息</li>
+<li>分析数据库结构和API接口</li>
+</ol>
+<p><strong>阶段2：权限获取</strong></p>
+<ol>
+<li>利用WebView漏洞注入恶意JavaScript</li>
+<li>通过JavaScript桥接调用Native方法</li>
+<li>利用文件读写漏洞获取系统权限</li>
+</ol>
+<p><strong>阶段3：数据窃取</strong></p>
+<ol>
+<li>使用硬编码密钥解密用户数据</li>
+<li>直接读取SQLite数据库文件</li>
+<li>窃取认证令牌和财务信息</li>
+</ol>
+<p><strong>阶段4：持久化控制</strong></p>
+<ol>
+<li>修改支付状态获取免费内容</li>
+<li>植入后门维持访问权限</li>
+<li>横向移动攻击其他用户</li>
+</ol>
+<h3 id="实际利用示例">实际利用示例</h3>
+<h4 id="示例1：免费获取付费内容">示例1：免费获取付费内容</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 直接修改数据库，将所有章节标记为已付费</span></span><br><span class="line"><span class="keyword">UPDATE</span> Chapter <span class="keyword">SET</span> paid<span class="operator">=</span><span class="number">1</span> <span class="keyword">WHERE</span> bookId<span class="operator">=</span><span class="string">&#x27;target_book_id&#x27;</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> Book <span class="keyword">SET</span> intergrateAttr <span class="operator">=</span> intergrateAttr <span class="operator">|</span> <span class="number">128</span> <span class="keyword">WHERE</span> bookId<span class="operator">=</span><span class="string">&#x27;target_book_id&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="示例2：窃取用户认证信息">示例2：窃取用户认证信息</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从日志文件中提取访问令牌</span></span><br><span class="line"><span class="type">String</span> <span class="variable">logContent</span> <span class="operator">=</span> readLogFile(<span class="string">&quot;/data/data/com.tencent.weread/files/logs/&quot;</span>);</span><br><span class="line"><span class="type">Pattern</span> <span class="variable">tokenPattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;accessToken:([^,]+)&quot;</span>);</span><br><span class="line"><span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> tokenPattern.matcher(logContent);</span><br><span class="line"><span class="keyword">if</span> (matcher.find()) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">accessToken</span> <span class="operator">=</span> matcher.group(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 使用令牌冒充用户</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="示例3：解密所有用户数据">示例3：解密所有用户数据</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用硬编码密钥解密数据</span></span><br><span class="line"><span class="type">String</span> <span class="variable">hardcodedKey</span> <span class="operator">=</span> <span class="string">&quot;isvrbeT7qUywVEZ1Ia0/aUVA/TcFaeV0wC8qFLc8rg4=&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">decryptedData</span> <span class="operator">=</span> AESEncrypt.decrypt(hardcodedKey, encryptedUserData);</span><br></pre></td></tr></table></figure>
+<h2 id="🔧-修复建议">🔧 修复建议</h2>
+<h3 id="短期修复">短期修复</h3>
+<h4 id="1-立即修复关键漏洞">1. 立即修复关键漏洞</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 修复硬编码密钥问题</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecureEncryption</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String <span class="title function_">getEncryptionKey</span><span class="params">(String userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 使用用户特定的密钥派生</span></span><br><span class="line">        <span class="keyword">return</span> KeyDerivation.deriveKey(userId, getDeviceId(), getAppSecret());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-加强输入验证">2. 加强输入验证</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 修复文件路径验证</span></span><br><span class="line"><span class="meta">@ReactMethod</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">(String path, String data, <span class="type">int</span> offset, Promise promise)</span> &#123;</span><br><span class="line">    <span class="comment">// 验证路径安全性</span></span><br><span class="line">    <span class="keyword">if</span> (!isPathSafe(path)) &#123;</span><br><span class="line">        promise.reject(<span class="string">&quot;INVALID_PATH&quot;</span>, <span class="string">&quot;Path not allowed&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 限制在应用沙盒内</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">safePath</span> <span class="operator">=</span> getApplicationContext().getFilesDir() + <span class="string">&quot;/&quot;</span> + sanitizePath(path);</span><br><span class="line">    <span class="comment">// ... 安全的文件操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-移除敏感日志">3. 移除敏感日志</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 安全的日志记录</span></span><br><span class="line">ELog.INSTANCE.log(<span class="number">3</span>, TAG, <span class="string">&quot;getLoginAccount from db: vid=&quot;</span> +</span><br><span class="line">    account.getVid().substring(<span class="number">0</span>, <span class="number">4</span>) + <span class="string">&quot;****&quot;</span>);  <span class="comment">// 只记录部分信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="长期架构重构">长期架构重构</h3>
+<h4 id="1-服务端验证所有关键操作">1. 服务端验证所有关键操作</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 正确的做法：服务端验证</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/purchase/chapter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;?&gt; purchaseChapter(<span class="meta">@RequestBody</span> PurchaseRequest request) &#123;</span><br><span class="line">    <span class="comment">// 1. 验证用户身份</span></span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> authService.validateToken(request.getToken());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 检查账户余额</span></span><br><span class="line">    <span class="keyword">if</span> (user.getBalance() &lt; chapter.getPrice()) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.badRequest().body(<span class="string">&quot;余额不足&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 扣费并更新状态</span></span><br><span class="line">    paymentService.deductBalance(user.getId(), chapter.getPrice());</span><br><span class="line">    chapterService.markAsPaid(user.getId(), chapter.getId());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(<span class="string">&quot;购买成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-实施零信任架构">2. 实施零信任架构</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">客户端 → API网关 → 认证服务 → 业务服务 → 数据库</span><br><span class="line">       ↑         ↑         ↑</span><br><span class="line">   TLS加密   身份验证   权限检查</span><br></pre></td></tr></table></figure>
+<h4 id="3-数据分类保护">3. 数据分类保护</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 敏感数据加密存储</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecureDataStorage</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">storeUserData</span><span class="params">(UserData data)</span> &#123;</span><br><span class="line">        <span class="comment">// 敏感字段加密</span></span><br><span class="line">        data.setAccessToken(encrypt(data.getAccessToken()));</span><br><span class="line">        data.setBalance(encrypt(String.valueOf(data.getBalance())));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 存储到数据库</span></span><br><span class="line">        database.save(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="✅-安全最佳实践">✅ 安全最佳实践</h2>
+<h3 id="移动应用安全原则">移动应用安全原则</h3>
+<ol>
+<li><strong>永不信任客户端</strong>：所有关键验证必须在服务端进行</li>
+<li><strong>最小权限原则</strong>：客户端只获取必要的数据</li>
+<li><strong>深度防御</strong>：多层安全控制机制</li>
+<li><strong>数据分类保护</strong>：根据敏感级别采用不同保护措施</li>
+<li><strong>安全开发生命周期</strong>：在开发的每个阶段都考虑安全</li>
+</ol>
+<h3 id="安全开发建议">安全开发建议</h3>
+<h4 id="1-代码审查检查清单">1. 代码审查检查清单</h4>
+<ul>
+<li>[ ] 是否存在硬编码密钥或敏感信息？</li>
+<li>[ ] 输入验证是否充分？</li>
+<li>[ ] 是否正确使用加密算法？</li>
+<li>[ ] 日志中是否包含敏感信息？</li>
+<li>[ ] 网络通信是否安全？</li>
+</ul>
+<h4 id="2-安全测试策略">2. 安全测试策略</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单元测试示例</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testNoHardcodedSecrets</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 检查代码中是否存在硬编码密钥</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">sourceCode</span> <span class="operator">=</span> readSourceCode();</span><br><span class="line">    assertFalse(<span class="string">&quot;Found hardcoded secret&quot;</span>,</span><br><span class="line">        sourceCode.contains(<span class="string">&quot;SDK_APP_SECRET&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInputValidation</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 测试路径遍历攻击</span></span><br><span class="line">    assertThrows(SecurityException.class, () -&gt; &#123;</span><br><span class="line">        fileManager.write(<span class="string">&quot;../../../etc/passwd&quot;</span>, <span class="string">&quot;malicious&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-安全配置管理">3. 安全配置管理</h4>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安全配置示例</span></span><br><span class="line"><span class="attr">security:</span></span><br><span class="line">  <span class="attr">encryption:</span></span><br><span class="line">    <span class="attr">algorithm:</span> <span class="string">&quot;AES-256-GCM&quot;</span></span><br><span class="line">    <span class="attr">key-rotation:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">key-rotation-interval:</span> <span class="string">&quot;30d&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">webview:</span></span><br><span class="line">    <span class="attr">javascript-enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">file-access-enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">allow-universal-access:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">logging:</span></span><br><span class="line">    <span class="attr">mask-sensitive-data:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-level:</span> <span class="string">&quot;WARN&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="📝-总结">📝 总结</h2>
+<p>通过这次深入的安全分析，我们发现了一个典型的&quot;客户端过度信任&quot;案例。该应用存在的安全问题不仅仅是技术实现上的缺陷，更是架构设计理念的根本性错误。</p>
+<h3 id="🎯-关键问题总结">🎯 关键问题总结</h3>
+<ol>
+<li><strong>架构设计缺陷</strong>：将核心业务逻辑完全依赖客户端实现</li>
+<li><strong>信任边界错误</strong>：对客户端数据和操作完全信任</li>
+<li><strong>数据保护不足</strong>：敏感数据明文存储，缺乏有效加密</li>
+<li><strong>输入验证缺失</strong>：多处存在注入和路径遍历漏洞</li>
+<li><strong>权限控制缺失</strong>：客户端可执行任意操作</li>
+</ol>
+<h3 id="💡-核心教训">💡 核心教训</h3>
+<p><strong>安全不是事后补救，而应该是架构设计的基石。</strong> 在移动应用开发中，我们必须始终坚持&quot;零信任&quot;原则，将安全考虑融入到每一个设计决策中。</p>
+<p>对于大型互联网公司而言，这种设计模式是<strong>不可接受的重大安全缺陷</strong>，可能导致：</p>
+<ul>
+<li>用户隐私大规模泄露</li>
+<li>商业模式被恶意绕过</li>
+<li>监管合规问题</li>
+<li>品牌信任危机</li>
+</ul>
+<h3 id="🚀-未来展望">🚀 未来展望</h3>
+<p>随着移动应用安全威胁的不断演进，我们需要：</p>
+<ol>
+<li><strong>建立安全开发文化</strong>：让安全成为开发团队的DNA</li>
+<li><strong>实施DevSecOps</strong>：将安全集成到CI/CD流程中</li>
+<li><strong>持续安全监控</strong>：建立实时威胁检测和响应机制</li>
+<li><strong>定期安全评估</strong>：通过渗透测试和代码审计发现问题</li>
+</ol>
+<hr>
+<p><em>本文仅用于技术研究和安全教育目的，请勿用于恶意攻击。如发现类似安全问题，请通过负责任的披露渠道上报给相关厂商。</em></p>
+<h2 id="📚-参考资料">📚 参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://owasp.org/www-project-mobile-security-testing-guide/">OWASP Mobile Security Testing Guide</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.android.com/topic/security/best-practices">Android Security Best Practices</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://security.tencent.com/">腾讯安全应急响应中心 (TSRC)</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.nist.gov/cyberframework">NIST Cybersecurity Framework</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://cwe.mitre.org/top25/">CWE Top 25 Most Dangerous Software Weaknesses</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.sans.org/top25-software-errors/">SANS Top 25 Software Errors</a></li>
+</ul>
+<h3 id="相关工具">相关工具</h3>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/skylot/jadx">JADX - Dex to Java decompiler</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://frida.re/">Frida - Dynamic instrumentation toolkit</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/MobSF/Mobile-Security-Framework-MobSF">MobSF - Mobile Security Framework</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/linkedin/qark">QARK - Quick Android Review Kit</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://yumi1.top">Yichen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://yumi1.top/weread-security-analysis-complete/">https://yumi1.top/weread-security-analysis-complete/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://yumi1.top" target="_blank">Yumi's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">安全研究</a><a class="post-meta__tags" href="/tags/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/">移动安全</a><a class="post-meta__tags" href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a><a class="post-meta__tags" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/">代码执行</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/">数据泄露</a></div><div class="post-share"><div class="social-share" data-image="/images/weread-security-cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/wechat.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/alipay.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/weread-security-analysis-1/" title="微信读书客户端 逆向分析"><img class="cover" src="/image/weread-security-analysis-1/2025-08-01-19-57-07.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-08</div><div class="info-item-2">微信读书客户端 逆向分析</div></div><div class="info-2"><div class="info-item-1">🔍 执行摘要 基于对wx读书Android客户端的逆向工程分析,仅供学习交流 微信读书客户端无加固,使用jadx反编译 开启unicode字符转译 开启反混淆 反混淆后的包已经相对较好阅读,使用jadx导出为gradle项目,使用idea/android studio方便阅读  安全风险分析 1. 会话管理安全缺陷 可预测的Session ID生成  sources/com/tencent/weread/model/domain/Session.java sources/moai/storage/Domain.java sources/com/tencent/weread/WeReadFragmentActivity.java  12345678910// Session.java - 会话ID生成逻辑public class Session extends Domain implements Parcelable &#123;    public static int generateId(String str) &#123;        return...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Livere</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div id="lv-container" data-id="city" data-uid="MTAyMC81ODg1Ni8zNTMxOA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E6%89%A7%E8%A1%8C%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">🔍 执行摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E5%85%B3%E9%94%AE%E5%8F%91%E7%8E%B0"><span class="toc-number">1.1.</span> <span class="toc-text">🎯 关键发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%B0-%E9%A2%84%E4%BC%B0%E6%BC%8F%E6%B4%9E%E4%BB%B7%E5%80%BC"><span class="toc-number">1.2.</span> <span class="toc-text">💰 预估漏洞价值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E6%8A%80%E6%9C%AF%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">🛠️ 技术背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A7%88"><span class="toc-number">2.1.</span> <span class="toc-text">应用架构概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">逆向工程方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A8-%E6%A0%B8%E5%BF%83%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">🚨 核心安全风险分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E5%AE%89%E5%85%A8%E7%BC%BA%E9%99%B7"><span class="toc-number">3.1.</span> <span class="toc-text">1. 会话管理安全缺陷</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%A2%84%E6%B5%8B%E7%9A%84Session-ID%E7%94%9F%E6%88%90"><span class="toc-number">3.1.1.</span> <span class="toc-text">可预测的Session ID生成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9"><span class="toc-number">3.2.</span> <span class="toc-text">2. 财务数据安全风险</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E8%B4%A2%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%98%8E%E6%96%87%E5%AD%98%E5%82%A8"><span class="toc-number">3.2.1.</span> <span class="toc-text">敏感财务信息明文存储</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%94%AF%E4%BB%98%E7%B3%BB%E7%BB%9F%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.3.</span> <span class="toc-text">3. 支付系统绕过漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%98%E8%B4%B9%E7%8A%B6%E6%80%81%E5%8F%AF%E8%A2%AB%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A7%E5%88%B6"><span class="toc-number">3.3.1.</span> <span class="toc-text">付费状态可被客户端控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AE%A4%E8%AF%81%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9"><span class="toc-number">3.4.</span> <span class="toc-text">4. 认证凭证泄露风险</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E8%AE%B0%E5%BD%95%E5%88%B0%E6%97%A5%E5%BF%97"><span class="toc-number">3.4.1.</span> <span class="toc-text">敏感信息记录到日志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A5-%E6%96%B0%E5%8F%91%E7%8E%B0%E7%9A%84%E4%B8%A5%E9%87%8D%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.</span> <span class="toc-text">💥 新发现的严重漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5"><span class="toc-number">4.1.</span> <span class="toc-text">5. 硬编码加密密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%86%99"><span class="toc-number">4.2.</span> <span class="toc-text">6. 文件系统任意读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">4.3.</span> <span class="toc-text">7. 不安全的反序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-WebView%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E9%9B%86%E7%BE%A4"><span class="toc-number">4.4.</span> <span class="toc-text">8. WebView安全漏洞集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-JavaScript%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5"><span class="toc-number">4.4.1.</span> <span class="toc-text">8.1 JavaScript代码注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-%E6%96%87%E4%BB%B6%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E8%BF%87%E5%BA%A6%E5%BC%80%E6%94%BE"><span class="toc-number">4.4.2.</span> <span class="toc-text">8.2 文件访问权限过度开放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3-%E5%9F%9F%E5%90%8D%E6%A3%80%E6%9F%A5%E7%BB%95%E8%BF%87"><span class="toc-number">4.4.3.</span> <span class="toc-text">8.3 域名检查绕过</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Native%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.5.</span> <span class="toc-text">9. Native内存管理漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-SQL%E6%B3%A8%E5%85%A5%E9%A3%8E%E9%99%A9"><span class="toc-number">4.6.</span> <span class="toc-text">10. SQL注入风险</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8F%97%EF%B8%8F-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">🏗️ 架构设计问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E4%BB%BB%E8%BE%B9%E7%95%8C%E9%94%99%E8%AF%AF"><span class="toc-number">5.1.</span> <span class="toc-text">信任边界错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%BB%E6%9D%83%E4%B8%A2%E5%A4%B1"><span class="toc-number">5.2.</span> <span class="toc-text">数据主权丢失</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8A-%E5%BD%B1%E5%93%8D%E8%AF%84%E4%BC%B0"><span class="toc-number">6.</span> <span class="toc-text">📊 影响评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E7%94%A8%E6%88%B7%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">6.1.</span> <span class="toc-text">对用户的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BC%81%E4%B8%9A%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">6.2.</span> <span class="toc-text">对企业的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%94%EF%B8%8F-%E6%94%BB%E5%87%BB%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90"><span class="toc-number">7.</span> <span class="toc-text">⚔️ 攻击场景分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E6%94%BB%E5%87%BB%E9%93%BE"><span class="toc-number">7.1.</span> <span class="toc-text">完整攻击链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%88%A9%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">7.2.</span> <span class="toc-text">实际利用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%8F%96%E4%BB%98%E8%B4%B9%E5%86%85%E5%AE%B9"><span class="toc-number">7.2.1.</span> <span class="toc-text">示例1：免费获取付费内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF"><span class="toc-number">7.2.2.</span> <span class="toc-text">示例2：窃取用户认证信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E8%A7%A3%E5%AF%86%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE"><span class="toc-number">7.2.3.</span> <span class="toc-text">示例3：解密所有用户数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE"><span class="toc-number">8.</span> <span class="toc-text">🔧 修复建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%AD%E6%9C%9F%E4%BF%AE%E5%A4%8D"><span class="toc-number">8.1.</span> <span class="toc-text">短期修复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%AB%8B%E5%8D%B3%E4%BF%AE%E5%A4%8D%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E"><span class="toc-number">8.1.1.</span> <span class="toc-text">1. 立即修复关键漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8A%A0%E5%BC%BA%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81"><span class="toc-number">8.1.2.</span> <span class="toc-text">2. 加强输入验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%A7%BB%E9%99%A4%E6%95%8F%E6%84%9F%E6%97%A5%E5%BF%97"><span class="toc-number">8.1.3.</span> <span class="toc-text">3. 移除敏感日志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E6%9C%9F%E6%9E%B6%E6%9E%84%E9%87%8D%E6%9E%84"><span class="toc-number">8.2.</span> <span class="toc-text">长期架构重构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%AA%8C%E8%AF%81%E6%89%80%E6%9C%89%E5%85%B3%E9%94%AE%E6%93%8D%E4%BD%9C"><span class="toc-number">8.2.1.</span> <span class="toc-text">1. 服务端验证所有关键操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%9E%E6%96%BD%E9%9B%B6%E4%BF%A1%E4%BB%BB%E6%9E%B6%E6%9E%84"><span class="toc-number">8.2.2.</span> <span class="toc-text">2. 实施零信任架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB%E4%BF%9D%E6%8A%A4"><span class="toc-number">8.2.3.</span> <span class="toc-text">3. 数据分类保护</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%AE%89%E5%85%A8%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">9.</span> <span class="toc-text">✅ 安全最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E5%8E%9F%E5%88%99"><span class="toc-number">9.1.</span> <span class="toc-text">移动应用安全原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%BC%80%E5%8F%91%E5%BB%BA%E8%AE%AE"><span class="toc-number">9.2.</span> <span class="toc-text">安全开发建议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-number">9.2.1.</span> <span class="toc-text">1. 代码审查检查清单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%AD%96%E7%95%A5"><span class="toc-number">9.2.2.</span> <span class="toc-text">2. 安全测试策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="toc-number">9.2.3.</span> <span class="toc-text">3. 安全配置管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9D-%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">📝 总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93"><span class="toc-number">10.1.</span> <span class="toc-text">🎯 关键问题总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%A1-%E6%A0%B8%E5%BF%83%E6%95%99%E8%AE%AD"><span class="toc-number">10.2.</span> <span class="toc-text">💡 核心教训</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%9A%80-%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">10.3.</span> <span class="toc-text">🚀 未来展望</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9A-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">11.</span> <span class="toc-text">📚 参考资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-number">11.1.</span> <span class="toc-text">相关工具</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Yichen</div><div class="footer_custom_text"><img class="icp-icon" src="/img/3.ico"><a href="https://icp.gov.moe/?keyword=20232218" rel="external nofollow noreferrer" target="_blank">萌ICP备20232218号</a> </br> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://app.netlify.com/sites/yichen1"><img src="https://api.netlify.com/api/v1/badges/f4d1b30b-18ae-4b6e-b430-5fb2901e25db/deploy-status" alt="netlify_status"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.com/yichen11818s-projects/blog"><img src="https://vercelbadge.soraharu.com/?app=yumi1" alt="vercel"></a> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dash.zeabur.com/projects/665625bd0f7ba66e4ba42867/services/665625c40f7ba66e4ba42869?envID=665625bdc0045f4aebb01bbb"><img src="https://img.shields.io/badge/zeabur-deployed-brightgreen?style=flat&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAGrCAMAAACBld94AAAABGdBTUEAALGPC%2FxhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAFzUkdCAK7OHOkAAABUUExURQAAAP%2F%2F%2F%2F%2F%2F%2F%2F9AAP%2F%2F%2F%2F%2BFVf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fn3%2F%2BhgP9EAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F2UA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BhgP9EAGMA%2FzHf3JIAAAAYdFJOUwAQICAwMEBgb3B%2FgICAgI%2BQn5%2Bvv8%2Ff76OlhKQAAAUNSURBVHja7d1hciJVAEZRwNiMRo1oB1rZ%2Fz5tY5UxkzCZWCHTcM%2FZwnd%2F9Kv3ClYAAAAAAAAAAAAAAFy0I%2B9ruhgCEIAABHBEAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAiA6WIIQAACEMARASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAAposhAAEIQABHBIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAmC6GAAQgAAEcEQACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACYLoYAhCAAARwRAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAABIAAEAACQABcYAC%2F8b52%2B%2BkyjCvOYDNOl2B%2FO6x4f%2Bu76QJY%2F0zWPx6mxTv8av3u%2FNY%2Fn%2B3iP%2F6sf0bD%2FbRs1j%2BnYeGf%2FtY%2Fq5tlz3%2FYDesVZ7PZTQtm%2FfKn%2F2HcWj87v%2FXP79Ny57f%2B%2BQ2LPfiPP1h%2FlT35Wb88v%2FX%2FVj35Wf8fzSvf8db6D5Inv%2FF2s6I6%2F976j3JXvh73POp9%2Bh%2Bs%2F6A5vyvep1qPfa3%2FsdaLOvhb%2F6nWp7%2F1H%2FXmP%2Bys%2F9G2i5nf456XVK58D79b%2F7nKyc%2Fjns%2Bk5rf%2BCY0rX1e8L4p8%2Blv%2FmdD81j%2Bl8NjX%2Bl9w9Ve%2B1j%2Ft%2Bj%2F9Pe55WWN%2B63%2FRlV%2F5etzzmmt%2B7Gv9V1z1yc8V72nXP7%2F1X3PNJz%2Frf41r%2FX0n63%2BNaz35WX8Rbk7N72lXwakrX0%2B7Er7Jp%2F9htP4yvDy%2Fxz0VJ658%2FW5Tw4uPfV3xVvzn5Gf9nsf5rR%2F078nP%2BkXPr3z9blPIs5Ofxz0lHzn%2FvfUX57MrX497WobR%2BmFP5nfFW7MZrR%2B23lk%2FbP70t37XPL%2F1w7YP83vcEzXsrR82jB73hA2j9cM2O1e8YfOnv%2FW75vmtH%2FbpYP2w7d76YcPocU%2FYMFo%2FbDP6S76w9Z3HPWHzyc9f8nXN87viDdvurR823Fs%2FbBitH3Yz%2Bt2msM3O456w%2BdPfX%2FJ1zfN73BP26WD9sGHvijdsGK0fNozWD9vsrB%2B2vrN%2B2Hzy87ina57f%2BmHbvcc9YcNo%2FbBhdMUbthmtH7beWT9s%2FvS3ftc8v%2FXDtgePe8KGvfXDhtFf8oUNo8c9H2qzKDe76f%2FY%2F%2FT9d7zV6sF0Ff74kzcTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAohbPbi9Cj%2F%2FwputAAAAyPkLdxcBz%2FNnKh0AAAAASUVORK5CYII%3D&label=zeabur" alt="vercel"></a> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/commits/yichen11818/blog" alt="commits"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yichen11818/blog"><img src="https://badgen.net/github/last-commit/yichen11818/blog" alt="last-commit"></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/instant.page/instantpage.js" type="module"></script><script src="https://unpkg.com/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://commityumi.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://commityumi.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://unpkg.com/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+
+  const loadLivere = (el, path) => {
+    window.livereOptions = {
+      refer: path || location.pathname
+    }
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyLivere = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Livere'
+      ? window.shuoshuoComment = { loadComment: loadLivere }
+      : window.loadOtherComment = loadLivere
+    return
+  }
+
+  if ('Twikoo' === 'Livere' || !true) {
+    if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://unpkg.com/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
