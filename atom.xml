@@ -232,28 +232,6 @@
   </entry>
   
   <entry>
-    <title>Test Link</title>
-    <link href="https://yumi1.top/test-link/"/>
-    <id>https://yumi1.top/test-link/</id>
-    <published>2024-12-31T16:00:00.000Z</published>
-    <updated>2025-08-01T14:16:45.380Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Test Link</h1><p>This is a test post to check if the link tag works.</p><div class="tag link"><a class="link-card" title="Test Link" href="https://example.com"><div class="left"><img src="https://example.com/favicon.ico"/></div><div class="right"><p class="text">Test Link</p><p class="url">https://example.com</p></div></a></div><p>End of test.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Test Link&lt;/h1&gt;
-&lt;p&gt;This is a test post to check if the link tag works.&lt;/p&gt;
-&lt;div class=&quot;tag link&quot;&gt;&lt;a class=&quot;link-card&quot; title=&quot;Test Link&quot; h</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>微信小程序开发笔记-2 基础语法</title>
     <link href="https://yumi1.top/unicloud-2/"/>
     <id>https://yumi1.top/unicloud-2/</id>
@@ -588,6 +566,34 @@
     
     
     <category term="hexo" scheme="https://yumi1.top/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>校园网进行路由器拨号 WiFi</title>
+    <link href="https://yumi1.top/school-net-2/"/>
+    <id>https://yumi1.top/school-net-2/</id>
+    <published>2024-04-26T05:14:11.000Z</published>
+    <updated>2024-05-30T21:42:25.774Z</updated>
+    
+    <content type="html"><![CDATA[<div class="site-card-group"><a class="site-card" href="https://www.yumi1.top/school-net"><div class="img"><img src="/image/bbh%20(2).webp"/></div><div class="info"><img src="/image/yumi.png"/><span class="title">校园网开机自动拨号+断线重连</span><span class="desc">yumi</span></div></a></div><p>继承上篇,本文可减少甚至解决拨号断网问题</p><h1>1.设备</h1><p><strong>小米4a千兆版</strong><br>咸鱼55元可入手,有能力可刷openwrt,后续会更新教程(挖坑)</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-04-48-33.png"/></div></div><h1>2.配置路由器</h1><h2 id="2-1连接路由器">2.1连接路由器</h2><h3 id="2-1-1-电脑有线连接-推荐">2.1.1 电脑有线连接(推荐)</h3><p>使用网线（RJ45）连接电脑和路由器lan口<br>2024-04-26-14-58-59.png</p><p>一般第一个口为wan口,下面会标,建议连第二口</p><h3 id="2-1-2-WAN口连接">2.1.2 WAN口连接</h3><div class="tip bell"><p><font size=3 color=red>WAN口需要连接学校提供的入户网线或面板</font></p></div><ol><li>如果入户网线为网线,可直接连接到路由器WAN口</li><li>如果学校只在墙上提供一个网线插口,需要使用一根网线连接到路由器WAN口,再使用网线连接到这个插口</li></ol><p>路由器中一般第一个口为wan口,下面会标,建议连第一口</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-04-45-30.png"/></div></div><h3 id="2-1-3-电脑，手机无线连接">2.1.3 电脑，手机无线连接</h3><p><strong>建议有线连接设置好WiFI名与密码后进行</strong><br>连接路由器wifi 可在路由器背后找到wifi名称和密码,如没有 可以找到重置按钮,开机时拿针插入重置按钮,等待指示灯变化,即可重置密码</p><h2 id="2-2寻找网关">2.2寻找网关</h2><ol><li>可在路由器背后找到网关地址,或管理后台链接</li><li>如未找到可试试以下方法<br><i class="fa-brands fa-windows"></i> + <kbd>R</kbd> 输入<code>cmd</code>回车</li></ol><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-14-55-56.png"/></div></div><p>输入<code>ipconfig</code>查看本机ip地址与网关地址</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-14-56-29.png"/></div></div><p>复制网关地址 一般以192.168开头.1结尾<br>我这里是<code>192.168.31.1</code></p><h2 id="2-3登录">2.3登录</h2><p>浏览器打开网关地址</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-15-01-01.png"/></div></div><p>密码:</p><ol><li>一般密码在路由器背面,如果没写可以试试直接进,第一次配置会提示设置密码</li><li>如果未提示且不知道密码,可以找到路由器上的重置按钮,开机时拿针插入重置按钮,等待指示灯变化,即可重置密码</li></ol><h2 id="2-4普通设置">2.4普通设置</h2><p>这里以小米路由器原版系统为例</p><h3 id="2-4-1-wifi设置">2.4.1 wifi设置</h3><p>不建议开双频合一 <font size=3 color=red>避免部分设备频繁切换导致掉线</font><br>建议将2.4G命名为 xxx+2.4G<br>平时距离较近连5G即可 不支持设备或距离较远连2.4G 功率设置为穿墙模式</p><table><thead><tr><th>频段</th><th>穿墙</th><th>速度</th></tr></thead><tbody><tr><td>2.4G</td><td>优秀</td><td>慢</td></tr><tr><td>5G</td><td>弱</td><td>快</td></tr></tbody></table><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/school-net-2/2024-04-26-15-20-56.png"/></div></div><h3 id="2-4-2-拨号上网">2.4.2 拨号上网</h3><p>我校登录抓包可得上网方式为 <strong>PPPoe拨号</strong><br>宽带账号: 学号+后缀<br>联通的后缀为<code>@unicom</code>移动的后缀为<code>@cmcc</code>电信的后缀为<code>@telecom</code><br>宽带密码: 身份证后六位</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-26-15-47-33.png"/></div></div><div class="tip bell"><p><font size=3 color=red>上网设置下面可设置WAN口速率 设置为1000M</font></p></div><p>至此你已经成功拨号上网了<br>其他设置可根据自己需求设置</p><h2 id="2-5其他设置">2.5其他设置</h2><h3 id="2-5-1-DHCP">2.5.1 DHCP</h3><p>DHCP是一种自动分配IP地址的协议,一般路由器默认开启 并2880分钟更改一次ip<br>若关闭DHCP 需要手动设置设备IP地址</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-03-59.png"/></div></div><p>如有访问设备需求 建议将常用设备mac与ip绑定(看见我onecloud了不，挖坑下次写)</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-04-05.png" alt="即可使用ip在局域网内访问固定设备"/></div><span class="image-caption">即可使用ip在局域网内访问固定设备</span></div><h3 id="2-5-2-DMZ">2.5.2 DMZ</h3><p>将设备端口以一对一的形式穿透，并将其ip暴露外网，我校为公网IP，开启DMZ后可直接访问设备（不推荐）</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-31-26.png"/></div></div><h3 id="2-5-3-端口转发">2.5.3 端口转发</h3><p>可将局域网的任意设备按任意规则转发到外网，例如将<code>192.168.31.2</code>的<code>10001</code>端口<code>TCP</code>,<code>UDP</code>转发到<code>80</code></p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-34-57.png"/></div></div><p>此时获取本机公网ip<div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-37-23.png"/></div></div><br>浏览器可通过 <code>18.163.117.80:80</code> 访问网站 (仅为示例,实际上ip应该在赣州 :)<br>此方案方便 安全 可按需转发 并支持多设备穿透外网</p><h3 id="2-5-4-UPnP">2.5.4 UPnP</h3><p>UPnP摆脱端口限制 可以直接穿透路由器进行访问 qbittorrent等软件需要使用其进行bt种子的p2p分享与下载<br>建议管理好UPnP设备,关闭不需要的设备,bilibili等直播软件与某些华为设备会自动开启UPnP占用你的网速</p><div class="img-wrap"><div class="img-bg"><img class="img" src="/image/../image/school-net-2/2024-04-27-05-43-42.png"/></div></div><p>注意按时清理或直接关闭此功能</p><p>下次更 刷老毛子openwrt教程</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;div class=&quot;site-card-group&quot;&gt;&lt;a class=&quot;site-card&quot; href=&quot;https://www.yumi1.top/school-net&quot;&gt;&lt;div class=&quot;img&quot;&gt;&lt;img src=&quot;/image/bbh%20(2).webp&quot;/</summary>
+      
+    
+    
+    
+    <category term="大学小技巧" scheme="https://yumi1.top/categories/%E5%A4%A7%E5%AD%A6%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="school" scheme="https://yumi1.top/tags/school/"/>
+    
+    <category term="WiFi" scheme="https://yumi1.top/tags/WiFi/"/>
+    
+    <category term="pppoe" scheme="https://yumi1.top/tags/pppoe/"/>
     
   </entry>
   
